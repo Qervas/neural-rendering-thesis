@@ -3,9 +3,13 @@
 **Master's Thesis** | Linköping University | 2025
 
 **Author:** Shaoxuan Yin
+
 **Supervisor:** Sergey Ignatenko
+
 **Examiner:** Jonas Unger
+
 **Programme:** Computer Science, Master's Programme (6MICS)
+
 **Course:** TQDV30 - Degree Project (30 hp)
 
 ---
