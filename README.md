@@ -60,6 +60,7 @@ The [CamMatrixCapture](https://github.com/Qervas/CamMatrixCapture) software was 
   school  = {Linköping University},
   year    = {2025},
   type    = {Master's thesis},
+  number  = {LiU-ITN-TEK-A--25/070--SE},
   address = {Norrköping, Sweden}
 }
 ```
