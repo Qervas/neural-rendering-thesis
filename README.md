@@ -16,7 +16,7 @@
 
 ## Abstract
 
-This thesis investigates multi-view capture systems for neural rendering, comparing traditional photogrammetry with modern neural rendering methods (NeRF and 3D Gaussian Splatting). Two datasets were created: a controlled studio dataset of 10 objects with 432 images each, and a large-scale outdoor dataset of Gränsö Castle with 5,262 images. The work addresses how neural rendering handles view-dependent effects (reflections, transparency) and examines scalability limits for large scenes.
+This thesis investigates multi-view capture systems for neural rendering, comparing traditional photogrammetry with modern neural rendering methods (NeRF and 3D Gaussian Splatting). Two datasets were created: a controlled studio dataset of 15 objects with 432 images each, and a large-scale outdoor dataset of Gränsö Castle with 5,262 images. The work addresses how neural rendering handles view-dependent effects (reflections, transparency) and examines scalability limits for large scenes.
 
 ---
 
@@ -34,7 +34,7 @@ This thesis investigates multi-view capture systems for neural rendering, compar
 ## Datasets
 
 ### Studio Objects Dataset
-- 10 objects captured with a 12-camera synchronized rig
+- 15 objects captured with a 12-camera synchronized rig
 - 432 images per object (12 cameras × 36 turntable positions)
 - Includes challenging materials: glass, metal, fur, translucent objects
 - ArUco marker-based geometric alignment
