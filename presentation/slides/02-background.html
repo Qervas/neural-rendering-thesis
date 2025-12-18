@@ -1,0 +1,234 @@
+<section class="section-slide">
+  <span class="section-number">2</span>
+  <h2>Background</h2>
+</section>
+
+<!-- Quick Recap -->
+<section>
+  <h2>Quick Recap</h2>
+  <p style="font-size: 1.3em;">We have two ways to turn photos into 3D:</p>
+  <div class="split-layout" style="margin-top: 1.5em;">
+    <div class="fragment">
+      <h3 style="color: var(--liu-blue);">Photogrammetry</h3>
+      <p>Match features across photos</p>
+      <p style="color: #666;">→ Triangulate 3D points</p>
+      <p style="color: #666;">→ Build mesh</p>
+    </div>
+    <div class="fragment">
+      <h3 style="color: var(--liu-turquoise);">Neural Rendering</h3>
+      <p>Train AI on your photos</p>
+      <p style="color: #666;">→ It learns the scene</p>
+      <p style="color: #666;">→ Generate any view</p>
+    </div>
+  </div>
+  <p class="fragment" style="margin-top: 1.5em; font-size: 1.2em;">Now let's see <strong>how</strong> neural rendering actually works...</p>
+</section>
+
+<!-- NeRF Deep Dive - Video Animation -->
+<section>
+  <h2>NeRF: Ray Marching</h2>
+  <video src="/presentation/assets/videos/nerf-raymarching.mp4"
+         controls
+         style="max-height: 65vh; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.15);">
+  </video>
+  <p style="margin-top: 0.5em; color: #666; font-size: 0.9em;">Click to play the animation</p>
+</section>
+
+<!-- NeRF - The Magic -->
+<section>
+  <h2>Why NeRF Handles Reflections</h2>
+  <div class="split-layout">
+    <div>
+      <p style="font-size: 1.2em;">The network takes <strong>viewing direction</strong> as input!</p>
+      <div class="fragment" style="margin-top: 1em;">
+        <p style="color: #666;">Same 3D point can return <em>different colors</em> depending on where you look from.</p>
+      </div>
+      <div class="fragment" style="margin-top: 1em;">
+        <p style="font-size: 1.1em;"><strong>This models reflections naturally.</strong></p>
+        <p style="color: #666;">A shiny surface looks different from different angles — NeRF learns that!</p>
+      </div>
+    </div>
+    <div class="fragment">
+      <div style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); padding: 30px; border-radius: 12px; color: white; text-align: center;">
+        <p style="font-size: 1.1em; margin-bottom: 1em;">Input:</p>
+        <p style="font-family: monospace; font-size: 1.2em;">(x, y, z) + (θ, φ)</p>
+        <p style="font-size: 0.9em; opacity: 0.7;">position + direction</p>
+        <p style="font-size: 1.1em; margin: 1em 0;">↓</p>
+        <p style="font-size: 1.1em;">Output:</p>
+        <p style="font-family: monospace; font-size: 1.2em;">(R, G, B) + σ</p>
+        <p style="font-size: 0.9em; opacity: 0.7;">color + density</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How NeRF Learns - Video Animation -->
+<section>
+  <h2>How NeRF Learns</h2>
+  <video src="/presentation/assets/videos/nerf-training.mp4"
+         controls
+         style="max-height: 65vh; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.15);">
+  </video>
+  <p style="margin-top: 0.5em; color: #666; font-size: 0.9em;">Click to play the animation</p>
+</section>
+
+<!-- NeRF Problem -->
+<section>
+  <h2>NeRF's Problem: Speed</h2>
+  <div style="text-align: center;">
+    <p style="font-size: 1.4em;">Every pixel needs <strong>hundreds of network queries</strong></p>
+    <div class="stats-grid fragment" style="margin-top: 1.5em;">
+      <div class="stat-card">
+        <div class="stat-value">2-3 hrs</div>
+        <div class="stat-label">Training Time</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">~30 sec</div>
+        <div class="stat-label">Render One Frame</div>
+      </div>
+    </div>
+    <p class="fragment" style="margin-top: 1.5em; font-size: 1.2em; color: var(--liu-blue);">Can we make it faster?</p>
+  </div>
+</section>
+
+<!-- 3D Gaussian Splatting - Video Animation -->
+<section>
+  <h2>3D Gaussian Splatting (2023)</h2>
+  <video src="/presentation/assets/videos/gaussiansplatting.mp4"
+         controls
+         style="max-height: 65vh; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.15);">
+  </video>
+  <p style="margin-top: 0.5em; color: #666; font-size: 0.9em;">Click to play the animation</p>
+</section>
+
+<!-- How 3DGS Learns - Video Animation -->
+<section>
+  <h2>How 3D Gaussian Splatting Learns</h2>
+  <video src="/presentation/assets/videos/gaussiansplatting-training.mp4"
+         controls
+         style="max-height: 65vh; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.15);">
+  </video>
+  <p style="margin-top: 0.5em; color: #666; font-size: 0.9em;">Click to play the animation</p>
+</section>
+
+<!-- 3DGS Explained Simply -->
+<section>
+  <h2>Think of It Like This...</h2>
+  <div class="split-layout">
+    <div>
+      <p style="font-size: 1.2em;">Imagine your scene is made of <strong>millions of tiny colored clouds</strong></p>
+      <div class="fragment" style="margin-top: 1em;">
+        <p>Each "cloud" (Gaussian) has:</p>
+        <ul style="margin-top: 0.5em;">
+          <li>A position in 3D</li>
+          <li>A shape (round, stretched, etc.)</li>
+          <li>A color</li>
+          <li>Transparency</li>
+        </ul>
+      </div>
+      <div class="fragment" style="margin-top: 1em;">
+        <p style="font-size: 1.1em;"><strong>To render:</strong> Project all clouds onto the screen, blend them together</p>
+      </div>
+    </div>
+    <div class="fragment">
+      <div style="background: #f0f9ff; padding: 30px; border-radius: 12px; text-align: center;">
+        <p style="font-size: 3em; margin-bottom: 0.3em;">☁️☁️☁️</p>
+        <p style="font-size: 2em; margin-bottom: 0.3em;">☁️☁️☁️☁️</p>
+        <p style="font-size: 1.5em;">☁️☁️☁️☁️☁️</p>
+        <p style="margin-top: 1em; color: #666;">Millions of fuzzy blobs = Your 3D scene</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Speed Comparison -->
+<section>
+  <h2>The Speed Difference</h2>
+  <table class="comparison-table" style="font-size: 1.1em;">
+    <thead>
+      <tr><th>Method</th><th>Training</th><th>Rendering</th></tr>
+    </thead>
+    <tbody>
+      <tr class="fragment">
+        <td class="method-col">NeRF (2020)</td>
+        <td>Hours</td>
+        <td>~30 seconds/frame</td>
+      </tr>
+      <tr class="fragment">
+        <td class="method-col">Instant-NGP (2022)</td>
+        <td>Minutes</td>
+        <td>~1 second/frame</td>
+      </tr>
+      <tr class="fragment">
+        <td class="method-col best">3D Gaussian Splatting (2023)</td>
+        <td class="best">~45 minutes</td>
+        <td class="best">30+ FPS (real-time!)</td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="fragment" style="margin-top: 1em; text-align: center; font-size: 1.1em;">
+    3DGS is <strong>100× faster</strong> at rendering — you can explore the scene in real-time!
+  </p>
+</section>
+
+<!-- Our Tools -->
+<section>
+  <h2>Our Tools</h2>
+  <div class="split-layout" style="align-items: start;">
+    <div class="fragment" style="font-size: 0.9em;">
+      <h3 style="color: var(--liu-blue); margin-bottom: 0.3em;">RealityCapture</h3>
+      <p style="color: #666; margin: 0;">by Capturing Reality (Epic Games)</p>
+      <ul style="margin: 0.5em 0;">
+        <li>Photogrammetry software</li>
+        <li>Camera pose estimation</li>
+        <li>Mesh reconstruction</li>
+        <li>Handles ArUco markers</li>
+      </ul>
+    </div>
+    <div class="fragment" style="font-size: 0.9em;">
+      <h3 style="color: var(--liu-turquoise); margin-bottom: 0.3em;">Nerfstudio</h3>
+      <p style="color: #666; margin: 0;">from UC Berkeley (open-source)</p>
+      <ul style="margin: 0.5em 0;">
+        <li>Neural rendering framework</li>
+        <li><strong>Nerfacto</strong> — NeRF method</li>
+        <li><strong>Splatfacto</strong> — 3DGS method</li>
+        <li>Same interface for both</li>
+      </ul>
+    </div>
+  </div>
+  <p class="fragment" style="margin-top: 1em; text-align: center; color: #666; font-size: 0.9em;">
+    RealityCapture exports camera poses → Nerfstudio trains neural rendering
+  </p>
+</section>
+
+<!-- Summary: When to Use What -->
+<section>
+  <h2>Summary: Which Method for What?</h2>
+  <table class="comparison-table">
+    <thead>
+      <tr><th>Need</th><th>Best Method</th><th>Why</th></tr>
+    </thead>
+    <tbody>
+      <tr class="fragment">
+        <td>Precise geometry (CAD)</td>
+        <td>Photogrammetry</td>
+        <td>Outputs actual mesh</td>
+      </tr>
+      <tr class="fragment">
+        <td>Shiny/glass objects</td>
+        <td>Neural Rendering</td>
+        <td>Handles view-dependent effects</td>
+      </tr>
+      <tr class="fragment">
+        <td>Real-time viewing</td>
+        <td>3D Gaussian Splatting</td>
+        <td>30+ FPS rendering</td>
+      </tr>
+      <tr class="fragment">
+        <td>Maximum visual quality</td>
+        <td>3D Gaussian Splatting</td>
+        <td>Best PSNR scores</td>
+      </tr>
+    </tbody>
+  </table>
+</section>

@@ -1,0 +1,266 @@
+<!-- NeRF Animated Step-by-Step -->
+<section>
+  <h2>NeRF: Ray Marching Step by Step</h2>
+  <div id="nerf-animation" style="position: relative; width: 100%; height: 550px; background: #fafafa; border-radius: 12px; overflow: hidden;">
+
+    <!-- Step indicators -->
+    <div style="position: absolute; top: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; z-index: 10;">
+      <div id="step-ind-1" class="step-indicator">1</div>
+      <div id="step-ind-2" class="step-indicator">2</div>
+      <div id="step-ind-3" class="step-indicator">3</div>
+      <div id="step-ind-4" class="step-indicator">4</div>
+    </div>
+
+    <!-- Camera -->
+    <div id="nerf-camera" style="position: absolute; left: 50px; top: 220px; opacity: 0;">
+      <div style="width: 60px; height: 45px; background: #333; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+        <div style="width: 30px; height: 30px; background: #00b3e7; border-radius: 50%;"></div>
+      </div>
+      <p style="text-align: center; margin-top: 8px; font-size: 14px; color: #666;">Camera</p>
+    </div>
+
+    <!-- Image plane -->
+    <div id="nerf-image" style="position: absolute; left: 140px; top: 180px; opacity: 0;">
+      <div style="width: 50px; height: 120px; background: white; border: 2px solid #ddd; display: grid; grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(4, 1fr);">
+        <div style="border: 1px solid #eee;"></div>
+        <div style="border: 1px solid #eee;"></div>
+        <div style="border: 1px solid #eee;"></div>
+        <div style="border: 1px solid #eee;"></div>
+        <div id="highlight-pixel" style="border: 1px solid #eee; background: transparent;"></div>
+        <div style="border: 1px solid #eee;"></div>
+        <div style="border: 1px solid #eee;"></div>
+        <div style="border: 1px solid #eee;"></div>
+      </div>
+      <p style="text-align: center; margin-top: 8px; font-size: 12px; color: #666;">One pixel</p>
+    </div>
+
+    <!-- Ray -->
+    <div id="nerf-ray" style="position: absolute; left: 200px; top: 242px; width: 0; height: 4px; background: linear-gradient(90deg, #00b3e7, rgba(255,107,107,0.3)); border-radius: 2px;"></div>
+
+    <!-- Sample points -->
+    <div id="sample-1" class="sample-point" style="left: 280px; top: 232px;">1</div>
+    <div id="sample-2" class="sample-point" style="left: 380px; top: 232px;">2</div>
+    <div id="sample-3" class="sample-point" style="left: 480px; top: 232px;">3</div>
+    <div id="sample-4" class="sample-point" style="left: 580px; top: 232px;">4</div>
+
+    <!-- Neural network box -->
+    <div id="nerf-nn" style="position: absolute; left: 350px; top: 80px; opacity: 0;">
+      <div style="background: #f0f9ff; border: 2px solid #00b3e7; border-radius: 12px; padding: 15px 25px; text-align: center;">
+        <p style="color: #00b3e7; font-weight: bold; margin-bottom: 5px;">Neural Network</p>
+        <p style="font-size: 13px; color: #666;">"What color? How dense?"</p>
+      </div>
+      <div id="nn-arrow" style="width: 2px; height: 0; background: #00b3e7; margin: 0 auto;"></div>
+    </div>
+
+    <!-- Query animations -->
+    <div id="query-bubble" style="position: absolute; opacity: 0; background: #00b3e7; color: white; padding: 8px 15px; border-radius: 20px; font-size: 12px; white-space: nowrap;">
+      color + density
+    </div>
+
+    <!-- 3D Scene blob -->
+    <div id="nerf-scene" style="position: absolute; left: 520px; top: 180px; opacity: 0;">
+      <div style="width: 140px; height: 100px; background: radial-gradient(ellipse, #e0e0e0 0%, #f5f5f5 100%); border-radius: 50%; border: 2px solid #ccc; display: flex; align-items: center; justify-content: center;">
+        <span style="color: #999; font-size: 14px;">3D Scene</span>
+      </div>
+    </div>
+
+    <!-- Final color output -->
+    <div id="nerf-output" style="position: absolute; right: 80px; top: 200px; opacity: 0;">
+      <div id="output-pixel" style="width: 70px; height: 70px; background: #ddd; border: 3px solid #333; border-radius: 8px;"></div>
+      <p style="text-align: center; margin-top: 8px; font-size: 14px; color: #666;">Final pixel</p>
+    </div>
+
+    <!-- Step descriptions -->
+    <div id="step-text" style="position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); text-align: center; width: 80%;">
+      <p id="step-description" style="font-size: 20px; color: #333; min-height: 30px;"></p>
+    </div>
+  </div>
+
+  <p style="margin-top: 15px; text-align: center; color: #888; font-size: 14px;">Press <kbd style="background: #eee; padding: 2px 8px; border-radius: 4px;">→</kbd> or <kbd style="background: #eee; padding: 2px 8px; border-radius: 4px;">Space</kbd> to advance</p>
+</section>
+
+<style>
+  .sample-point {
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    background: #ff6b6b;
+    border-radius: 50%;
+    opacity: 0;
+    transform: scale(0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+  }
+
+  .step-indicator {
+    width: 32px;
+    height: 32px;
+    background: #e0e0e0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #999;
+    transition: all 0.3s ease;
+  }
+
+  .step-indicator.active {
+    background: #00b3e7;
+    color: white;
+    transform: scale(1.1);
+  }
+
+  .step-indicator.done {
+    background: #4ecdc4;
+    color: white;
+  }
+</style>
+
+<script>
+  // This will be initialized when the slide becomes active
+  (function() {
+    let currentStep = 0;
+    let animationInitialized = false;
+
+    function initNerfAnimation() {
+      if (animationInitialized) return;
+      animationInitialized = true;
+
+      const gsap = window.gsap;
+      if (!gsap) {
+        console.warn('GSAP not loaded');
+        return;
+      }
+
+      // Reset all elements
+      gsap.set(['#nerf-camera', '#nerf-image', '#nerf-scene', '#nerf-output', '#nerf-nn'], { opacity: 0 });
+      gsap.set('#nerf-ray', { width: 0 });
+      gsap.set('.sample-point', { opacity: 0, scale: 0 });
+      gsap.set('#nn-arrow', { height: 0 });
+      gsap.set('#highlight-pixel', { background: 'transparent' });
+      gsap.set('#output-pixel', { background: '#ddd' });
+
+      currentStep = 0;
+      updateStepIndicators();
+      document.getElementById('step-description').textContent = 'Click or press arrow key to start...';
+    }
+
+    function updateStepIndicators() {
+      for (let i = 1; i <= 4; i++) {
+        const ind = document.getElementById(`step-ind-${i}`);
+        ind.classList.remove('active', 'done');
+        if (i < currentStep) ind.classList.add('done');
+        else if (i === currentStep) ind.classList.add('active');
+      }
+    }
+
+    function runStep(step) {
+      const gsap = window.gsap;
+      const desc = document.getElementById('step-description');
+
+      switch(step) {
+        case 1:
+          // Step 1: Show camera and shoot ray through pixel
+          desc.textContent = 'Step 1: Shoot a ray from the camera through one pixel';
+          gsap.to('#nerf-camera', { opacity: 1, duration: 0.5 });
+          gsap.to('#nerf-image', { opacity: 1, duration: 0.5, delay: 0.3 });
+          gsap.to('#highlight-pixel', { background: 'rgba(0, 179, 231, 0.4)', duration: 0.3, delay: 0.6 });
+          gsap.to('#nerf-scene', { opacity: 1, duration: 0.5, delay: 0.5 });
+          gsap.to('#nerf-ray', { width: 500, duration: 1, delay: 0.8, ease: 'power2.out' });
+          break;
+
+        case 2:
+          // Step 2: Sample points along the ray
+          desc.textContent = 'Step 2: Sample points along the ray';
+          gsap.to('#sample-1', { opacity: 1, scale: 1, duration: 0.3, delay: 0 });
+          gsap.to('#sample-2', { opacity: 1, scale: 1, duration: 0.3, delay: 0.2 });
+          gsap.to('#sample-3', { opacity: 1, scale: 1, duration: 0.3, delay: 0.4 });
+          gsap.to('#sample-4', { opacity: 1, scale: 1, duration: 0.3, delay: 0.6 });
+          break;
+
+        case 3:
+          // Step 3: Query neural network for each point
+          desc.textContent = 'Step 3: Ask neural network: "What color and density at this point?"';
+          gsap.to('#nerf-nn', { opacity: 1, duration: 0.5 });
+          gsap.to('#nn-arrow', { height: 40, duration: 0.3, delay: 0.3 });
+
+          // Animate queries from each point to network
+          const bubble = document.getElementById('query-bubble');
+          const points = ['#sample-1', '#sample-2', '#sample-3', '#sample-4'];
+          const colors = ['#ff6b6b', '#ff8e8e', '#ffb3b3', '#ffd4d4'];
+
+          points.forEach((pt, i) => {
+            gsap.to(pt, {
+              background: colors[i],
+              duration: 0.2,
+              delay: i * 0.4,
+              yoyo: true,
+              repeat: 1
+            });
+          });
+          break;
+
+        case 4:
+          // Step 4: Blend colors to get final pixel
+          desc.textContent = 'Step 4: Blend all colors together → Final pixel color!';
+          gsap.to('#nerf-output', { opacity: 1, duration: 0.5 });
+          gsap.to('#output-pixel', {
+            background: '#ff6b6b',
+            duration: 1,
+            delay: 0.5,
+            ease: 'power2.inOut'
+          });
+
+          // Animate samples fading toward output
+          gsap.to('.sample-point', {
+            opacity: 0.3,
+            scale: 0.7,
+            duration: 0.5,
+            delay: 0.3,
+            stagger: 0.1
+          });
+          break;
+      }
+    }
+
+    function nextStep() {
+      if (currentStep < 4) {
+        currentStep++;
+        updateStepIndicators();
+        runStep(currentStep);
+        return true; // Consumed the event
+      }
+      return false; // Let Reveal.js handle it
+    }
+
+    // Listen for Reveal.js events
+    if (window.Reveal) {
+      Reveal.on('slidechanged', event => {
+        // Check if this is our slide
+        if (event.currentSlide.querySelector('#nerf-animation')) {
+          initNerfAnimation();
+        }
+      });
+
+      Reveal.on('fragmentshown', event => {
+        // Not using fragments for this, but keeping for reference
+      });
+    }
+
+    // Also init if already on the slide
+    setTimeout(() => {
+      if (document.querySelector('#nerf-animation')) {
+        initNerfAnimation();
+      }
+    }, 500);
+
+    // Expose for manual triggering
+    window.nerfNextStep = nextStep;
+    window.nerfInit = initNerfAnimation;
+  })();
+</script>

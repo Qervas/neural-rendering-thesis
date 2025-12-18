@@ -1,0 +1,201 @@
+<!-- Outline -->
+<section id="toc">
+  <h2>Outline</h2>
+  <ol>
+    <li class="fragment fade-up">Introduction</li>
+    <li class="fragment fade-up">Background</li>
+    <li class="fragment fade-up">Methodology</li>
+    <li class="fragment fade-up">Implementation</li>
+    <li class="fragment fade-up">Results</li>
+    <li class="fragment fade-up">Discussion</li>
+    <li class="fragment fade-up">Conclusions</li>
+  </ol>
+</section>
+
+<section class="section-slide">
+  <span class="section-number">1</span>
+  <h2>Introduction</h2>
+</section>
+
+<!-- What is 3D Reconstruction? - Visual explanation -->
+<section>
+  <h2>What is 3D Reconstruction?</h2>
+  <img src="/presentation/assets/3d-reconstruction-concept.svg" alt="3D Reconstruction Concept" class="hero">
+</section>
+
+<!-- The Problem: You Already Know How -->
+<section>
+  <h2>Think About an Apple</h2>
+  <div class="split-layout">
+    <div>
+      <p class="fragment" style="font-size: 1.3em;">Close your eyes.</p>
+      <p class="fragment" style="font-size: 1.3em; margin-top: 0.5em;">Picture an apple.</p>
+      <p class="fragment" style="font-size: 1.3em; margin-top: 0.5em;"><strong>Now rotate it in your mind.</strong></p>
+      <div class="fragment" style="margin-top: 1.5em;">
+        <p style="font-size: 1.1em; color: #666;">You just built a 3D model from memory.</p>
+        <p style="font-size: 1.1em; color: #666;">Your brain does this instantly.</p>
+      </div>
+      <div class="fragment" style="margin-top: 1.5em;">
+        <p style="font-size: 1.4em; color: var(--liu-blue);"><strong>Can we teach computers to do this from photos?</strong></p>
+      </div>
+    </div>
+    <div class="fragment">
+      <video autoplay loop muted playsinline style="max-height: 50vh; border-radius: 12px;">
+        <source src="/presentation/assets/videos/apple-rotation.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+</section>
+
+<!-- Real-world Applications -->
+<section>
+  <h2>Applications Everywhere</h2>
+  <div class="feature-grid">
+    <div class="feature-card fragment">
+      <div class="icon">🛒</div>
+      <h4>E-commerce</h4>
+      <p>3D product views online</p>
+    </div>
+    <div class="feature-card fragment">
+      <div class="icon">🏛️</div>
+      <h4>Heritage</h4>
+      <p>Digitize artifacts & sites</p>
+    </div>
+    <div class="feature-card fragment">
+      <div class="icon">🎬</div>
+      <h4>Film/VFX</h4>
+      <p>Digital doubles, environments</p>
+    </div>
+    <div class="feature-card fragment">
+      <div class="icon">🗺️</div>
+      <h4>Mapping</h4>
+      <p>3D city models from photos</p>
+    </div>
+  </div>
+</section>
+
+<!-- Two Approaches - Intro -->
+<section>
+  <h2>Two Ways to Solve This</h2>
+  <div class="split-layout">
+    <div class="fragment">
+      <h3 style="color: var(--liu-blue);">Photogrammetry</h3>
+      <p style="font-size: 1.1em;">The traditional approach</p>
+      <p style="color: #666;">Used since the 1990s</p>
+    </div>
+    <div class="fragment">
+      <h3 style="color: var(--liu-turquoise);">Neural Rendering</h3>
+      <p style="font-size: 1.1em;">The AI approach</p>
+      <p style="color: #666;">Emerged in 2020</p>
+    </div>
+  </div>
+</section>
+
+<!-- Photogrammetry Explained -->
+<section>
+  <h2>Photogrammetry: How It Works</h2>
+  <img src="/presentation/assets/photogrammetry-steps.svg" alt="Photogrammetry steps" class="hero">
+</section>
+
+<!-- Neural Rendering Explained -->
+<section>
+  <h2>Neural Rendering: How It Works</h2>
+  <img src="/presentation/assets/neural-rendering-concept.svg" alt="Neural rendering concept" class="hero">
+</section>
+
+<!-- The Material Problem -->
+<section>
+  <h2>The Problem with Materials</h2>
+  <p style="font-size: 1.2em;">Photogrammetry needs to match the <strong>same point</strong> across photos.</p>
+  <div class="fragment" style="margin-top: 1.5em;">
+    <p style="font-size: 1.1em;">But some materials <strong>look different from every angle:</strong></p>
+  </div>
+  <div class="stats-grid fragment" style="margin-top: 1em;">
+    <div class="stat-card">
+      <div class="stat-value">🪞</div>
+      <div class="stat-label">Shiny Metal</div>
+      <p class="small">Reflects surroundings — changes with viewpoint</p>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">🫙</div>
+      <div class="stat-label">Glass</div>
+      <p class="small">Light passes through — no surface features</p>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">⬜</div>
+      <div class="stat-label">Plain White</div>
+      <p class="small">No texture — nothing to match</p>
+    </div>
+  </div>
+  <p class="fragment" style="margin-top: 1em; font-size: 1.1em;"><strong>Neural rendering handles these better</strong> — it learns the <em>appearance</em>, not just geometry</p>
+</section>
+
+
+<!-- Why Datasets Matter -->
+<section>
+  <h2>So What's the Problem?</h2>
+  <p class="lead" style="font-size: 1.3em;">These algorithms learn from photos.</p>
+  <div class="fragment" style="margin-top: 1.5em;">
+    <p style="font-size: 1.4em;"><strong>Bad photos = Bad 3D models</strong></p>
+    <p style="font-size: 1.1em; color: #666;">No algorithm can fix that.</p>
+  </div>
+  <div class="fragment" style="margin-top: 2em;">
+    <p style="font-size: 1.2em;">But most research datasets...</p>
+    <div class="stats-grid" style="margin-top: 1em;">
+      <div class="stat-card">
+        <div class="stat-value">Avoid</div>
+        <div class="stat-label">Hard Materials</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">Skip</div>
+        <div class="stat-label">Failure Cases</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">Hide</div>
+        <div class="stat-label">How They Captured</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Thesis Aim -->
+<section>
+  <h2>Thesis Aim</h2>
+  <div class="callout info">
+    <p><strong>Goal:</strong> Create high-quality datasets for neural rendering and document the capture process</p>
+  </div>
+  <div class="split-layout fragment" style="margin-top: 1.5em;">
+    <div>
+      <h4>Studio Capture</h4>
+      <ul>
+        <li>12 synchronized cameras</li>
+        <li>Motorized turntable</li>
+        <li>15 objects, varied materials</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Outdoor Capture</h4>
+      <ul>
+        <li>Gränsö Castle (heritage site)</li>
+        <li>Drone + SLR photography</li>
+        <li>5,262 images total</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Research Questions -->
+<section>
+  <h2>Research Questions</h2>
+  <ol>
+    <li class="fragment fade-up">
+      <strong>RQ1:</strong> What are the practical challenges of creating multi-view datasets for neural rendering?
+    </li>
+    <li class="fragment fade-up">
+      <strong>RQ2:</strong> Which dataset characteristics matter most for neural rendering quality?
+    </li>
+    <li class="fragment fade-up">
+      <strong>RQ3:</strong> Which materials are hardest to capture?
+    </li>
+  </ol>
+</section>

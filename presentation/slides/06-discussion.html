@@ -1,0 +1,219 @@
+<section class="section-slide">
+  <span class="section-number">6</span>
+  <h2>Discussion</h2>
+</section>
+
+<!-- Core Question -->
+<section>
+  <h2>The Central Question</h2>
+  <div style="text-align: center; margin-top: 2em;">
+    <p style="font-size: 1.4em; color: #333;">When should we use</p>
+    <div style="display: flex; justify-content: center; align-items: center; gap: 1em; margin: 1em 0;">
+      <span style="font-size: 1.6em; font-weight: 700; color: #00a3e0;">Photogrammetry</span>
+      <span style="font-size: 1.4em; color: #666;">vs</span>
+      <span style="font-size: 1.6em; font-weight: 700; color: #0cc7d3;">Neural Rendering</span>
+    </div>
+    <p style="font-size: 1.4em; color: #333;">?</p>
+  </div>
+  <p class="fragment" style="text-align: center; margin-top: 2em; color: #666;">They're not competitors — they're <strong>complementary tools</strong></p>
+</section>
+
+<!-- Complementary Approaches -->
+<section>
+  <h2>Two Tools, Different Strengths</h2>
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2em; margin-top: 1em;">
+    <div class="fragment" style="background: #e7f5ff; padding: 1.5em; border-radius: 12px;">
+      <h3 style="color: #00a3e0; margin: 0 0 0.8em 0;">Photogrammetry</h3>
+      <ul style="margin: 0; font-size: 0.95em;">
+        <li><strong>Goal:</strong> Geometric accuracy</li>
+        <li><strong>Output:</strong> Meshes with measurements</li>
+        <li><strong>Strength:</strong> Large-scale scenes</li>
+        <li><strong>Weakness:</strong> Shiny/transparent fails</li>
+      </ul>
+      <p style="margin: 1em 0 0 0; font-size: 0.85em; color: #666;">→ Gränsö: 0.61px reprojection error</p>
+    </div>
+    <div class="fragment" style="background: #e6fcf5; padding: 1.5em; border-radius: 12px;">
+      <h3 style="color: #0cc7d3; margin: 0 0 0.8em 0;">Neural Rendering</h3>
+      <ul style="margin: 0; font-size: 0.95em;">
+        <li><strong>Goal:</strong> Visual fidelity</li>
+        <li><strong>Output:</strong> Novel view synthesis</li>
+        <li><strong>Strength:</strong> Any material works</li>
+        <li><strong>Weakness:</strong> GPU memory limits</li>
+      </ul>
+      <p style="margin: 1em 0 0 0; font-size: 0.85em; color: #666;">→ Glass vase: 31.39 dB PSNR</p>
+    </div>
+  </div>
+</section>
+
+<!-- The Studio Problem -->
+<section>
+  <h2>The "Studio Problem"</h2>
+  <p style="color: #666;">Why did COLMAP fail on <strong style="color: #dc3545;">85%</strong> of our studio objects?</p>
+  <div style="display: flex; justify-content: center; align-items: center; gap: 2em; margin-top: 1.5em;">
+    <div class="fragment" style="flex: 1; text-align: center;">
+      <div style="font-size: 4em; margin-bottom: 0.2em;">🔄</div>
+      <p style="margin: 0;"><strong>Rotating Object</strong></p>
+    </div>
+    <div class="fragment" style="font-size: 2em; color: #dc3545;">+</div>
+    <div class="fragment" style="flex: 1; text-align: center;">
+      <div style="font-size: 4em; margin-bottom: 0.2em;">💡</div>
+      <p style="margin: 0;"><strong>Fixed Lights</strong></p>
+    </div>
+    <div class="fragment" style="font-size: 2em; color: #dc3545;">=</div>
+    <div class="fragment" style="flex: 1; text-align: center;">
+      <div style="font-size: 4em; margin-bottom: 0.2em;">❌</div>
+      <p style="margin: 0;"><strong>Moving Shadows</strong></p>
+    </div>
+  </div>
+  <p class="fragment" style="text-align: center; margin-top: 1.5em; color: #666; font-size: 0.9em;">
+    Feature matching assumes consistent appearance → fails when highlights move
+  </p>
+</section>
+
+<!-- Why Blurry Images Hurt -->
+<section>
+  <h2>Why Blurry Images Hurt</h2>
+  <div style="display: flex; justify-content: center; align-items: center; gap: 2em; margin-top: 1em;">
+    <div style="flex: 1; text-align: center;">
+      <div style="background: #e8f5e9; padding: 1.5em; border-radius: 12px; margin-bottom: 0.5em;">
+        <p style="font-size: 3em; margin: 0;">📸</p>
+        <p style="margin: 0.5em 0 0 0; font-weight: 600; color: #2e7d32;">Sharp Image</p>
+      </div>
+      <p style="font-size: 0.85em; color: #666;">Edge at pixel 127</p>
+      <p style="font-size: 0.85em; color: #2e7d32; font-weight: 600;">→ Precise match</p>
+    </div>
+    <div style="flex: 1; text-align: center;">
+      <div style="background: #ffebee; padding: 1.5em; border-radius: 12px; margin-bottom: 0.5em;">
+        <p style="font-size: 3em; margin: 0;">🌫️</p>
+        <p style="margin: 0.5em 0 0 0; font-weight: 600; color: #c62828;">Blurry Image</p>
+      </div>
+      <p style="font-size: 0.85em; color: #666;">Edge somewhere in 120–134?</p>
+      <p style="font-size: 0.85em; color: #c62828; font-weight: 600;">→ Uncertain match</p>
+    </div>
+  </div>
+  <div class="fragment" style="background: #fff3e0; padding: 1em 1.5em; border-radius: 10px; margin-top: 1.2em; border-left: 4px solid #e65100;">
+    <p style="margin: 0; font-size: 0.9em; color: #333;">
+      <strong>The problem:</strong> Feature matching algorithms can't determine exact boundary positions in blurry regions.
+      This adds noise to camera pose estimation and degrades reconstruction quality.
+    </p>
+  </div>
+  <p class="fragment" style="text-align: center; margin-top: 1em; color: #666; font-size: 0.85em;">
+    <strong>Causes:</strong> Motion blur, depth-of-field limits, camera shake, low light
+  </p>
+</section>
+
+<!-- Contrast Matters -->
+<section>
+  <h2>Contrast: Object vs Background</h2>
+  <div style="display: flex; justify-content: center; align-items: stretch; gap: 2em; margin-top: 1em;">
+    <div class="fragment" style="flex: 1; background: #1a1a1a; padding: 1.5em; border-radius: 12px; text-align: center;">
+      <p style="font-size: 2.5em; margin: 0;">🌕</p>
+      <p style="margin: 0.5em 0 0 0; font-weight: 600; color: #fff;">Bright Object</p>
+      <p style="margin: 0.3em 0 0 0; font-size: 0.85em; color: #aaa;">in Dark Room</p>
+      <p style="margin: 0.8em 0 0 0; font-size: 0.9em; color: #4caf50;">✓ High contrast</p>
+    </div>
+    <div class="fragment" style="flex: 1; background: #1a1a1a; padding: 1.5em; border-radius: 12px; text-align: center;">
+      <p style="font-size: 2.5em; margin: 0;">🌑</p>
+      <p style="margin: 0.5em 0 0 0; font-weight: 600; color: #666;">Dark Object</p>
+      <p style="margin: 0.3em 0 0 0; font-size: 0.85em; color: #aaa;">in Dark Room</p>
+      <p style="margin: 0.8em 0 0 0; font-size: 0.9em; color: #f44336;">✗ Low contrast</p>
+    </div>
+    <div class="fragment" style="flex: 1; background: #f5f5f5; padding: 1.5em; border-radius: 12px; text-align: center; border: 1px solid #ddd;">
+      <p style="font-size: 2.5em; margin: 0;">🌑</p>
+      <p style="margin: 0.5em 0 0 0; font-weight: 600; color: #333;">Dark Object</p>
+      <p style="margin: 0.3em 0 0 0; font-size: 0.85em; color: #666;">in White Room</p>
+      <p style="margin: 0.8em 0 0 0; font-size: 0.9em; color: #4caf50;">✓ High contrast</p>
+    </div>
+  </div>
+  <div class="fragment" style="background: #ffebee; padding: 1em 1.5em; border-radius: 10px; margin-top: 1.2em; border-left: 4px solid #c62828;">
+    <p style="margin: 0; font-size: 0.9em; color: #333;">
+      <strong>Example:</strong> Dark dog statue in our dark studio → low contrast → NeRF struggled to learn boundaries
+    </p>
+  </div>
+  <p class="fragment" style="text-align: center; margin-top: 1em; color: #666; font-size: 0.85em;">
+    <strong>Takeaway:</strong> Match your background to maximize object-background contrast
+  </p>
+</section>
+
+<!-- Solution: ArUco -->
+<section>
+  <h2>Solution: Decouple the Problem</h2>
+  <div style="display: flex; justify-content: center; align-items: stretch; gap: 1em; margin-top: 1em;">
+    <div class="fragment" style="flex: 1; background: #fff3e0; padding: 1.2em; border-radius: 12px; text-align: center;">
+      <h3 style="color: #e65100; margin: 0 0 0.5em 0; font-size: 1em;">Pose Estimation</h3>
+      <p style="font-size: 3em; margin: 0.3em 0;">📐</p>
+      <p style="margin: 0; font-size: 0.9em;"><strong>ArUco Markers</strong></p>
+      <p style="margin: 0.3em 0 0 0; font-size: 0.8em; color: #666;">High-contrast, flat, lighting-invariant</p>
+    </div>
+    <div style="display: flex; align-items: center; font-size: 2em; color: #666;">→</div>
+    <div class="fragment" style="flex: 1; background: #e6fcf5; padding: 1.2em; border-radius: 12px; text-align: center;">
+      <h3 style="color: #0cc7d3; margin: 0 0 0.5em 0; font-size: 1em;">Reconstruction</h3>
+      <p style="font-size: 3em; margin: 0.3em 0;">🧠</p>
+      <p style="margin: 0; font-size: 0.9em;"><strong>Neural Network</strong></p>
+      <p style="margin: 0.3em 0 0 0; font-size: 0.8em; color: #666;">Learns appearance from any viewpoint</p>
+    </div>
+  </div>
+  <p class="fragment" style="text-align: center; margin-top: 1.2em; background: #f8f9fa; padding: 0.8em; border-radius: 8px; font-size: 0.9em;">
+    <strong>Key insight:</strong> Don't fight the lighting — let the neural network handle it
+  </p>
+</section>
+
+<!-- When to Use What -->
+<section>
+  <h2>When to Use What?</h2>
+  <table class="comparison-table" style="margin-top: 1em;">
+    <thead>
+      <tr><th>Scenario</th><th>Best Method</th><th>Why</th></tr>
+    </thead>
+    <tbody>
+      <tr class="fragment">
+        <td>Small object, shiny/glass</td>
+        <td style="color: #0cc7d3;"><strong>3D Gaussian Splatting</strong></td>
+        <td>Handles view-dependent effects</td>
+      </tr>
+      <tr class="fragment">
+        <td>Small object, matte</td>
+        <td style="color: #666;"><strong>Either works</strong></td>
+        <td>Both produce good results</td>
+      </tr>
+      <tr class="fragment">
+        <td>Large outdoor scene</td>
+        <td style="color: #00a3e0;"><strong>Photogrammetry</strong></td>
+        <td>No GPU memory limits</td>
+      </tr>
+      <tr class="fragment">
+        <td>Heritage documentation</td>
+        <td style="color: #00a3e0;"><strong>Photogrammetry</strong></td>
+        <td>Metric accuracy required</td>
+      </tr>
+      <tr class="fragment">
+        <td>Interactive visualization</td>
+        <td style="color: #0cc7d3;"><strong>Neural Rendering</strong></td>
+        <td>Novel views, real-time rendering</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- Key Takeaways -->
+<section>
+  <h2>Key Takeaways</h2>
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5em; margin-top: 1em;">
+    <div class="fragment" style="background: #e7f5ff; padding: 1.2em; border-radius: 10px; border-left: 4px solid #00a3e0;">
+      <h4 style="color: #00a3e0; margin: 0 0 0.5em 0;">Complementary, Not Competing</h4>
+      <p style="margin: 0; font-size: 0.9em; color: #333;">Use photogrammetry for geometry, neural for visuals</p>
+    </div>
+    <div class="fragment" style="background: #fff3e0; padding: 1.2em; border-radius: 10px; border-left: 4px solid #e65100;">
+      <h4 style="color: #e65100; margin: 0 0 0.5em 0;">Studio Setup Matters</h4>
+      <p style="margin: 0; font-size: 0.9em; color: #333;">ArUco markers solve the lighting conflict</p>
+    </div>
+    <div class="fragment" style="background: #e6fcf5; padding: 1.2em; border-radius: 10px; border-left: 4px solid #0cc7d3;">
+      <h4 style="color: #0cc7d3; margin: 0 0 0.5em 0;">Materials No Longer Limit Us</h4>
+      <p style="margin: 0; font-size: 0.9em; color: #333;">Neural rendering handles glass, metal, anything</p>
+    </div>
+    <div class="fragment" style="background: #f3e5f5; padding: 1.2em; border-radius: 10px; border-left: 4px solid #9c27b0;">
+      <h4 style="color: #9c27b0; margin: 0 0 0.5em 0;">Scale Still Matters</h4>
+      <p style="margin: 0; font-size: 0.9em; color: #333;">Photogrammetry wins for 5000+ image scenes</p>
+    </div>
+  </div>
+</section>

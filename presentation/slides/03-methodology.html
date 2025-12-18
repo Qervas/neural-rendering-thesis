@@ -1,0 +1,380 @@
+<section class="section-slide">
+  <span class="section-number">3</span>
+  <h2>Methodology</h2>
+</section>
+
+<section>
+  <h2>Two Capture Scenarios</h2>
+  <div class="split-layout">
+    <div class="fragment">
+      <h3>Studio Capture</h3>
+      <ul>
+        <li>12 synchronized cameras</li>
+        <li>Motorized turntable</li>
+        <li>Controlled lighting</li>
+        <li>15 objects, 432 images each</li>
+      </ul>
+    </div>
+    <div class="fragment">
+      <h3>Outdoor Capture</h3>
+      <ul>
+        <li>Gränsö Castle (heritage site)</li>
+        <li>Drone + SLR photography</li>
+        <li>5,262 images total</li>
+        <li>Real-world scale & conditions</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section data-background-image="/figures/methodology/real_scene_setup.png" data-background-size="contain" data-background-color="#1a1a1a">
+  <div class="video-overlay" style="max-width: 500px;">
+    <h2>Studio Capture System</h2>
+    <p>12 industrial cameras on 90° arc with motorized turntable</p>
+  </div>
+</section>
+
+<section data-background-image="/figures/methodology/measure_scene_setup.png" data-background-size="contain" data-background-color="#1a1a1a">
+  <div class="video-overlay" style="max-width: 500px;">
+    <h2>Measured Setup</h2>
+    <p>Camera positions and distances for precise calibration</p>
+  </div>
+</section>
+
+<section data-background-color="#ffffff">
+  <h2>Camera Arc Geometry</h2>
+  <img src="/figures/diagrams/methodology_fig_hemisphere-camera-concept.svg" alt="Hemisphere camera concept" style="height: 90vh; width: auto; margin: 0 auto; display: block;">
+  <p class="fragment" style="margin-top: 0.5em;">12 cameras × 36 positions = <strong style="color: var(--liu-turquoise);">432 viewpoints</strong></p>
+</section>
+
+<section>
+  <h2>Hardware Specifications</h2>
+  <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5em; margin-top: 1em;">
+    <div class="fragment" style="background: #f8f9fa; padding: 1.2em; border-radius: 12px; border-left: 4px solid var(--liu-blue);">
+      <h3 style="color: var(--liu-blue); margin: 0 0 0.5em 0; font-size: 1.1em;">📷 Cameras</h3>
+      <p style="margin: 0; font-size: 0.9em;"><strong>Teledyne DALSA</strong></p>
+      <p style="margin: 0.3em 0; font-size: 0.85em; color: #666;">Genie Nano GigE</p>
+      <ul style="margin: 0.5em 0; font-size: 0.8em; color: #555;">
+        <li>Area Scan CMOS</li>
+        <li>GigE Vision interface</li>
+        <li>C-mount lens</li>
+      </ul>
+    </div>
+    <div class="fragment" style="background: #f8f9fa; padding: 1.2em; border-radius: 12px; border-left: 4px solid var(--liu-turquoise);">
+      <h3 style="color: var(--liu-turquoise); margin: 0 0 0.5em 0; font-size: 1.1em;">🔄 Turntable</h3>
+      <p style="margin: 0; font-size: 0.9em;"><strong>Revopoint</strong></p>
+      <p style="margin: 0.3em 0; font-size: 0.85em; color: #666;">Dual-Axis Turntable</p>
+      <ul style="margin: 0.5em 0; font-size: 0.8em; color: #555;">
+        <li>Bluetooth control</li>
+        <li>Sub-degree accuracy</li>
+        <li>Programmable rotation</li>
+      </ul>
+    </div>
+    <div class="fragment" style="background: #f8f9fa; padding: 1.2em; border-radius: 12px; border-left: 4px solid #ffc107;">
+      <h3 style="color: #e6a800; margin: 0 0 0.5em 0; font-size: 1.1em;">💡 Lighting</h3>
+      <p style="margin: 0; font-size: 0.9em;"><strong>Softbox Area Lights</strong></p>
+      <p style="margin: 0.3em 0; font-size: 0.85em; color: #666;">4× symmetric placement</p>
+      <ul style="margin: 0.5em 0; font-size: 0.8em; color: #555;">
+        <li>Diffuse illumination</li>
+        <li>Minimizes highlights</li>
+        <li>Consistent across views</li>
+      </ul>
+    </div>
+  </div>
+  <p class="fragment" style="margin-top: 1em; text-align: center; color: #666; font-size: 0.85em;">
+    Distance to object: <strong>~1.4m</strong> &nbsp;|&nbsp; Arc span: <strong>90°</strong> &nbsp;|&nbsp; Lenses: <strong>manual focus & aperture</strong>
+  </p>
+</section>
+
+<section>
+  <h2>System Evolution</h2>
+  <table class="comparison-table">
+    <thead>
+      <tr><th>Version</th><th>Rotation</th><th>Markers</th><th>Alignment</th></tr>
+    </thead>
+    <tbody>
+      <tr class="fragment"><td class="method-col">V1 Manual</td><td>Hand</td><td>None</td><td class="worst">85% (diffuse) / 30% (shiny)</td></tr>
+      <tr class="fragment"><td class="method-col">V2 ArUco</td><td>Hand</td><td>ArUco markers</td><td class="neutral">95%</td></tr>
+      <tr class="fragment"><td class="method-col">V3 Motorized</td><td>Turntable</td><td>ArUco markers</td><td class="best">98%</td></tr>
+    </tbody>
+  </table>
+  <div class="fragment" style="margin-top: 1em; display: flex; align-items: center; justify-content: center; gap: 1.5em;">
+    <span style="color: #666; font-size: 0.9em;"><strong>ArUco markers</strong> =</span>
+    <!-- ArUco marker examples (5x5 grid patterns) -->
+    <svg width="50" height="50" viewBox="0 0 7 7" style="border: 2px solid black;">
+      <rect width="7" height="7" fill="white"/>
+      <rect x="0" y="0" width="1" height="7" fill="black"/>
+      <rect x="6" y="0" width="1" height="7" fill="black"/>
+      <rect x="0" y="0" width="7" height="1" fill="black"/>
+      <rect x="0" y="6" width="7" height="1" fill="black"/>
+      <rect x="2" y="2" width="1" height="1" fill="black"/>
+      <rect x="4" y="2" width="1" height="1" fill="black"/>
+      <rect x="3" y="3" width="1" height="1" fill="black"/>
+      <rect x="2" y="4" width="1" height="1" fill="black"/>
+      <rect x="4" y="4" width="1" height="1" fill="black"/>
+    </svg>
+    <svg width="50" height="50" viewBox="0 0 7 7" style="border: 2px solid black;">
+      <rect width="7" height="7" fill="white"/>
+      <rect x="0" y="0" width="1" height="7" fill="black"/>
+      <rect x="6" y="0" width="1" height="7" fill="black"/>
+      <rect x="0" y="0" width="7" height="1" fill="black"/>
+      <rect x="0" y="6" width="7" height="1" fill="black"/>
+      <rect x="2" y="2" width="1" height="1" fill="black"/>
+      <rect x="3" y="2" width="1" height="1" fill="black"/>
+      <rect x="2" y="3" width="1" height="1" fill="black"/>
+      <rect x="4" y="3" width="1" height="1" fill="black"/>
+      <rect x="3" y="4" width="1" height="1" fill="black"/>
+      <rect x="4" y="4" width="1" height="1" fill="black"/>
+    </svg>
+    <svg width="50" height="50" viewBox="0 0 7 7" style="border: 2px solid black;">
+      <rect width="7" height="7" fill="white"/>
+      <rect x="0" y="0" width="1" height="7" fill="black"/>
+      <rect x="6" y="0" width="1" height="7" fill="black"/>
+      <rect x="0" y="0" width="7" height="1" fill="black"/>
+      <rect x="0" y="6" width="7" height="1" fill="black"/>
+      <rect x="3" y="2" width="1" height="1" fill="black"/>
+      <rect x="4" y="2" width="1" height="1" fill="black"/>
+      <rect x="2" y="3" width="1" height="1" fill="black"/>
+      <rect x="3" y="3" width="1" height="1" fill="black"/>
+      <rect x="2" y="4" width="1" height="1" fill="black"/>
+    </svg>
+    <span style="color: #666; font-size: 0.85em;">← Software detects these patterns reliably</span>
+  </div>
+</section>
+
+<!-- Capture Software -->
+<section>
+  <h2>Capture Software</h2>
+  <div class="split-layout" style="align-items: center;">
+    <div>
+      <p>Custom software to control 12 cameras + turntable</p>
+      <ul style="margin-top: 1em;">
+        <li class="fragment"><strong>C# + WinUI 3</strong> frontend</li>
+        <li class="fragment"><strong>C++</strong> hardware control backend</li>
+        <li class="fragment">Sapera SDK for camera sync</li>
+        <li class="fragment">Bluetooth turntable control</li>
+      </ul>
+      <p class="fragment" style="margin-top: 1em; color: var(--liu-turquoise);"><strong>Open-source</strong> on GitHub</p>
+    </div>
+    <div class="fragment" style="text-align: center;">
+      <svg viewBox="0 0 200 160" style="max-width: 400px; width: 100%;">
+        <!-- UI window -->
+        <rect x="20" y="10" width="160" height="110" fill="#f5f5f5" stroke="#333" stroke-width="2" rx="5"/>
+        <rect x="20" y="10" width="160" height="20" fill="#00a3e0" rx="5"/>
+        <rect x="20" y="28" width="160" height="2" fill="#00a3e0"/>
+        <circle cx="35" cy="20" r="4" fill="#ff5f57"/>
+        <circle cx="50" cy="20" r="4" fill="#ffbd2e"/>
+        <circle cx="65" cy="20" r="4" fill="#28c840"/>
+        <!-- Grid of cameras -->
+        <g fill="#666">
+          <rect x="35" y="45" width="25" height="18" rx="2"/>
+          <rect x="70" y="45" width="25" height="18" rx="2"/>
+          <rect x="105" y="45" width="25" height="18" rx="2"/>
+          <rect x="140" y="45" width="25" height="18" rx="2"/>
+          <rect x="35" y="70" width="25" height="18" rx="2"/>
+          <rect x="70" y="70" width="25" height="18" rx="2"/>
+          <rect x="105" y="70" width="25" height="18" rx="2"/>
+          <rect x="140" y="70" width="25" height="18" rx="2"/>
+        </g>
+        <!-- Capture button -->
+        <rect x="70" y="98" width="60" height="16" fill="#0cc7d3" rx="3"/>
+        <text x="100" y="109" text-anchor="middle" font-size="8" fill="white">CAPTURE</text>
+        <!-- Output text -->
+        <text x="100" y="145" text-anchor="middle" font-size="9" fill="#666">→ Images + Transforms</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- The Problem: Why Photogrammetry Fails - Video Demo -->
+<section>
+  <h2>The Problem: Shiny & Transparent</h2>
+  <video src="/presentation/assets/videos/glass-rotation.mp4"
+         autoplay loop muted
+         style="max-height: 60vh; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.15);">
+  </video>
+  <p style="margin-top: 0.5em; color: #666; font-size: 1.1em;">Watch the <strong>reflections move</strong> as the glass rotates</p>
+</section>
+
+<section>
+  <h2>Our Solution: Two Approaches</h2>
+  <div class="split-layout">
+    <div class="fragment" style="padding: 1.5em; background: #e7f5ff; border-radius: 12px; text-align: center;">
+      <h3 style="color: var(--liu-blue); margin-top: 0;">Option 1: Fix the Photos</h3>
+      <p><strong>Polarization filters</strong></p>
+      <p style="color: #666; font-size: 0.9em;">Remove reflections before capture</p>
+      <p style="color: #666; font-size: 0.9em;">→ Photogrammetry works again</p>
+    </div>
+    <div class="fragment" style="padding: 1.5em; background: #e6fcf5; border-radius: 12px; text-align: center;">
+      <h3 style="color: var(--liu-turquoise); margin-top: 0;">Option 2: Use Neural Rendering</h3>
+      <p><strong>NeRF / 3D Gaussian Splatting</strong></p>
+      <p style="color: #666; font-size: 0.9em;">Learns view-dependent effects</p>
+      <p style="color: #666; font-size: 0.9em;">→ Handles reflections & transparency</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Polarization for Specular Surfaces</h2>
+  <div style="display: flex; align-items: center; gap: 2em;">
+    <div style="flex: 0 0 35%;">
+      <p>Cross-polarization blocks specular reflections:</p>
+      <ul>
+        <li class="fragment">Polarizer on lights (horizontal)</li>
+        <li class="fragment">Analyzer on camera (vertical)</li>
+        <li class="fragment"><strong style="color: var(--liu-turquoise);">Specular highlights blocked</strong></li>
+      </ul>
+    </div>
+    <div class="fragment" style="flex: 1;">
+      <img src="/figures/diagrams/methodology_fig_polarization-principle.svg" alt="Polarization" style="height: 70vh; width: auto;">
+    </div>
+  </div>
+</section>
+
+<section data-background-image="/figures/drone/merged_gränsö.jpg" data-background-size="cover">
+  <div class="video-overlay" style="max-width: 600px;">
+    <h2>Gränsö Castle</h2>
+    <p>17th-century heritage site</p>
+    <div class="stats-grid" style="margin-top: 1em;">
+      <div class="stat-card"><div class="stat-value">5,207</div><div class="stat-label">Images</div></div>
+      <div class="stat-card"><div class="stat-value">2,226</div><div class="stat-label">Drone</div></div>
+      <div class="stat-card"><div class="stat-value">2,981</div><div class="stat-label">SLR</div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Site Challenges</h2>
+  <div class="split-layout">
+    <div>
+      <ul style="font-size: 1.1em;">
+        <li class="fragment">Height variations (ground → dome roof)</li>
+        <li class="fragment">Complex architecture (dome, wings, courtyard)</li>
+        <li class="fragment">Vegetation blocking views</li>
+        <li class="fragment">Water reflections</li>
+        <li class="fragment">Changing weather & lighting</li>
+      </ul>
+    </div>
+    <div class="fragment" style="text-align: center;">
+      <p style="font-size: 1.2em; color: var(--liu-blue);"><strong>Solution:</strong></p>
+      <p style="font-size: 1.1em;">Drone + Handheld SLR</p>
+      <p style="color: #666;">Two capture methods to cover everything</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Capture Strategy</h2>
+  <div style="display: flex; justify-content: center; align-items: center;">
+    <svg viewBox="0 0 600 350" style="max-width: 900px; width: 100%;">
+      <!-- Building (simple manor shape) -->
+      <rect x="200" y="180" width="200" height="100" fill="#e8e8e8" stroke="#333" stroke-width="2"/>
+      <!-- Dome -->
+      <ellipse cx="300" cy="180" rx="40" ry="25" fill="#d0d0d0" stroke="#333" stroke-width="2"/>
+      <!-- Wings -->
+      <rect x="130" y="200" width="70" height="60" fill="#e0e0e0" stroke="#333" stroke-width="2"/>
+      <rect x="400" y="200" width="70" height="60" fill="#e0e0e0" stroke="#333" stroke-width="2"/>
+      <!-- Ground -->
+      <line x1="50" y1="280" x2="550" y2="280" stroke="#666" stroke-width="2"/>
+
+      <!-- Drone at top -->
+      <g transform="translate(300, 50)">
+        <rect x="-15" y="-5" width="30" height="10" fill="#00a3e0" rx="3"/>
+        <line x1="-25" y1="0" x2="-15" y2="0" stroke="#333" stroke-width="2"/>
+        <line x1="15" y1="0" x2="25" y2="0" stroke="#333" stroke-width="2"/>
+        <circle cx="-25" cy="0" r="5" fill="#333"/>
+        <circle cx="25" cy="0" r="5" fill="#333"/>
+      </g>
+      <text x="300" y="30" text-anchor="middle" font-size="14" font-weight="bold" fill="#00a3e0">Drone</text>
+
+      <!-- Drone scan pattern (grid lines) -->
+      <g stroke="#00a3e0" stroke-width="1" stroke-dasharray="4,4" opacity="0.6">
+        <line x1="150" y1="70" x2="450" y2="70"/>
+        <line x1="150" y1="90" x2="450" y2="90"/>
+        <line x1="150" y1="110" x2="450" y2="110"/>
+        <!-- Arrows down -->
+        <line x1="200" y1="70" x2="200" y2="150"/>
+        <line x1="300" y1="70" x2="300" y2="150"/>
+        <line x1="400" y1="70" x2="400" y2="150"/>
+      </g>
+      <text x="480" y="95" font-size="11" fill="#00a3e0">Top-down grid</text>
+
+      <!-- SLR cameras on ground -->
+      <g fill="#0cc7d3">
+        <!-- Left camera -->
+        <rect x="80" y="260" width="20" height="15" rx="2"/>
+        <rect x="85" y="255" width="10" height="8" rx="1"/>
+        <!-- Right camera -->
+        <rect x="500" y="260" width="20" height="15" rx="2"/>
+        <rect x="505" y="255" width="10" height="8" rx="1"/>
+      </g>
+      <text x="90" y="295" text-anchor="middle" font-size="12" font-weight="bold" fill="#0cc7d3">SLR</text>
+      <text x="510" y="295" text-anchor="middle" font-size="12" font-weight="bold" fill="#0cc7d3">SLR</text>
+
+      <!-- SLR view angles -->
+      <g stroke="#0cc7d3" stroke-width="1.5" fill="none" opacity="0.6">
+        <!-- Left camera angles -->
+        <path d="M100,260 L180,200" marker-end="url(#arrowTurquoise)"/>
+        <path d="M100,260 L200,180"/>
+        <!-- Right camera angles -->
+        <path d="M500,260 L420,200"/>
+        <path d="M500,260 L400,180"/>
+      </g>
+      <text x="90" y="320" text-anchor="middle" font-size="10" fill="#666">Vertical angles</text>
+      <text x="510" y="320" text-anchor="middle" font-size="10" fill="#666">Closer views</text>
+
+      <!-- Labels -->
+      <text x="300" y="340" text-anchor="middle" font-size="12" fill="#666">Drone covers top • SLR covers walls & blind spots</text>
+    </svg>
+  </div>
+</section>
+
+<section>
+  <h2>The Scale Problem</h2>
+  <div style="text-align: center;">
+    <p style="font-size: 1.3em;">5,207 images is <strong style="color: #dc3545;">too big</strong> for neural rendering</p>
+    <div class="fragment" style="margin-top: 1em; padding: 1em; background: #fff3cd; border-radius: 8px; display: inline-block;">
+      <p style="margin: 0; color: #856404;">GPU memory limits the scene size</p>
+    </div>
+    <div class="fragment" style="margin-top: 1.5em;">
+      <p style="font-size: 1.1em;"><strong>For neural rendering:</strong></p>
+      <p style="color: #666;">Smaller batch size + downscale images + fewer images</p>
+    </div>
+    <div class="fragment" style="margin-top: 1em; padding: 1em; background: #e7f5ff; border-radius: 8px; display: inline-block;">
+      <p style="margin: 0; color: var(--liu-blue);">RealityCapture handled the full dataset as one model (hundreds of parts) ✓</p>
+    </div>
+  </div>
+</section>
+
+<!-- Evaluation Metrics -->
+<section>
+  <h2>Evaluation Metrics</h2>
+  <p style="margin-bottom: 0.8em; color: #666;">How we measure neural rendering quality:</p>
+  <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2em;">
+    <div class="fragment" style="background: #e7f5ff; padding: 1.2em; border-radius: 10px; text-align: center;">
+      <h3 style="color: #00a3e0; margin: 0; font-size: 1.1em;">PSNR ↑</h3>
+      <p style="font-size: 0.8em; color: #666; margin: 0.4em 0;">Peak Signal-to-Noise Ratio</p>
+      <p style="font-size: 0.85em; margin: 0.5em 0; color: #333;"><strong>Pixel-by-pixel</strong> difference</p>
+      <p style="font-size: 0.8em; color: #666; margin: 0;">Higher = closer match</p>
+      <hr style="border: none; border-top: 1px solid #b8daff; margin: 0.6em 0;">
+      <p style="font-size: 0.75em; color: #0069d9; margin: 0;"><strong>&gt;30 dB</strong> = good quality</p>
+    </div>
+    <div class="fragment" style="background: #e6fcf5; padding: 1.2em; border-radius: 10px; text-align: center;">
+      <h3 style="color: #0cc7d3; margin: 0; font-size: 1.1em;">SSIM ↑</h3>
+      <p style="font-size: 0.8em; color: #666; margin: 0.4em 0;">Structural Similarity Index</p>
+      <p style="font-size: 0.85em; margin: 0.5em 0; color: #333;"><strong>Edges & textures</strong> preserved</p>
+      <p style="font-size: 0.8em; color: #666; margin: 0;">Higher = better structure</p>
+      <hr style="border: none; border-top: 1px solid #99e6e6; margin: 0.6em 0;">
+      <p style="font-size: 0.75em; color: #0aa; margin: 0;"><strong>&gt;0.9</strong> = good quality</p>
+    </div>
+    <div class="fragment" style="background: #f3e5f5; padding: 1.2em; border-radius: 10px; text-align: center;">
+      <h3 style="color: #9c27b0; margin: 0; font-size: 1.1em;">LPIPS ↓</h3>
+      <p style="font-size: 0.8em; color: #666; margin: 0.4em 0;">Learned Perceptual Similarity</p>
+      <p style="font-size: 0.85em; margin: 0.5em 0; color: #333;"><strong>Human-like</strong> perception (AI)</p>
+      <p style="font-size: 0.8em; color: #666; margin: 0;">Lower = more similar</p>
+      <hr style="border: none; border-top: 1px solid #ce93d8; margin: 0.6em 0;">
+      <p style="font-size: 0.75em; color: #7b1fa2; margin: 0;"><strong>&lt;0.1</strong> = good quality</p>
+    </div>
+  </div>
+  <p class="fragment" style="margin-top: 0.8em; text-align: center; color: #666; font-size: 0.85em;">Evaluated on held-out test views (10-20% of images not used for training)</p>
+</section>

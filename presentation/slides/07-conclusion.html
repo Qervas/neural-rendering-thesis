@@ -1,0 +1,210 @@
+<section class="section-slide">
+  <span class="section-number">7</span>
+  <h2>Conclusions</h2>
+</section>
+
+<section>
+  <h2>Contributions</h2>
+  <div class="feature-grid">
+    <div class="feature-card fragment">
+      <div class="icon">📷</div>
+      <h4>Capture System</h4>
+      <p>12-camera automated studio with ArUco alignment</p>
+    </div>
+    <div class="feature-card fragment">
+      <div class="icon">📊</div>
+      <h4>Datasets</h4>
+      <p>15 studio objects + 5,262 castle images</p>
+    </div>
+    <div class="feature-card fragment">
+      <div class="icon">🔬</div>
+      <h4>Comparative Study</h4>
+      <p>Photogrammetry vs NeRF vs 3DGS</p>
+    </div>
+    <div class="feature-card fragment">
+      <div class="icon">💻</div>
+      <h4>Open Source</h4>
+      <p>7,950 lines of capture software</p>
+    </div>
+  </div>
+</section>
+
+<!-- Research Questions Answered -->
+<section>
+  <h2>Research Questions Answered</h2>
+  <div style="display: flex; flex-direction: column; gap: 1em; margin-top: 0.8em;">
+    <div class="fragment" style="background: #e7f5ff; padding: 1em 1.2em; border-radius: 10px; border-left: 4px solid #00a3e0;">
+      <h4 style="color: #00a3e0; margin: 0 0 0.4em 0; font-size: 0.9em;">RQ1: What are the practical challenges of creating multi-view datasets for neural rendering?</h4>
+      <p style="margin: 0; font-size: 0.85em; color: #333;">
+        <strong>Answer:</strong> Lighting inconsistency breaks feature matching (COLMAP: 2/432 aligned).
+        <span style="color: #0cc7d3; font-weight: 600;">→ ArUco markers solved it</span>
+      </p>
+    </div>
+    <div class="fragment" style="background: #e6fcf5; padding: 1em 1.2em; border-radius: 10px; border-left: 4px solid #0cc7d3;">
+      <h4 style="color: #0cc7d3; margin: 0 0 0.4em 0; font-size: 0.9em;">RQ2: Which dataset characteristics matter most for neural rendering quality?</h4>
+      <p style="margin: 0; font-size: 0.85em; color: #333;">
+        <strong>Answer:</strong> Camera pose accuracy (sub-pixel) and image sharpness are critical.
+        <span style="color: #00a3e0; font-weight: 600;">→ 33.27 dB PSNR with good poses</span>
+      </p>
+    </div>
+    <div class="fragment" style="background: #fff3e0; padding: 1em 1.2em; border-radius: 10px; border-left: 4px solid #e65100;">
+      <h4 style="color: #e65100; margin: 0 0 0.4em 0; font-size: 0.9em;">RQ3: Which materials are hardest to capture?</h4>
+      <p style="margin: 0; font-size: 0.85em; color: #333;">
+        <strong>Answer:</strong> Featureless & transparent fail in photogrammetry.
+        <span style="color: #2e7d32; font-weight: 600;">→ Neural rendering handles all materials</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- What This Means -->
+<section>
+  <h2>So What?</h2>
+  <div style="margin-top: 1.5em;">
+    <p class="fragment" style="font-size: 1.1em; margin-bottom: 1.2em;">
+      <strong style="color: #00a3e0;">Don't pick one method.</strong> Use photogrammetry when you need measurements, neural when you need pretty renders.
+    </p>
+    <p class="fragment" style="font-size: 1.1em; margin-bottom: 1.2em;">
+      <strong style="color: #0cc7d3;">Turntable setups need markers.</strong> Rotating objects under fixed lights breaks feature matching. ArUco fixes that.
+    </p>
+    <p class="fragment" style="font-size: 1.1em; margin-bottom: 1.2em;">
+      <strong style="color: #e65100;">Glass and shiny stuff? Use neural.</strong> Photogrammetry assumes matte surfaces. It doesn't know what to do with reflections.
+    </p>
+    <p class="fragment" style="font-size: 1.1em;">
+      <strong style="color: #9c27b0;">Big scenes? Stick with photogrammetry.</strong> NeRF runs out of GPU memory. 32GB only goes so far.
+    </p>
+  </div>
+</section>
+
+<!-- What's Next -->
+<section>
+  <h2>What's Next?</h2>
+  <ul style="font-size: 1.05em; line-height: 1.8;">
+    <li class="fragment"><strong>Polarization on all cameras</strong> — we tested on phone, now do it properly</li>
+    <li class="fragment"><strong>Focus stacking</strong> — outdoor shots were blurry at some distances</li>
+    <li class="fragment"><strong>Moving stuff</strong> — 4D Gaussian Splatting exists, we should try it</li>
+  </ul>
+  <p class="fragment" style="margin-top: 1.5em; color: #666; font-size: 0.9em;">
+    The big unsolved problem: neural rendering at building scale. GPU memory is the bottleneck.
+  </p>
+</section>
+
+<!-- Exciting Direction: Inverse Rendering -->
+<section>
+  <h2>The Exciting Part: Inverse Rendering</h2>
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5em; margin-top: 0.8em;">
+    <div class="fragment" style="background: #f3e5f5; padding: 1.2em; border-radius: 10px;">
+      <h4 style="color: #9c27b0; margin: 0 0 0.5em 0;">The Idea</h4>
+      <p style="margin: 0; font-size: 0.9em; color: #333;">
+        Material doesn't change during capture. If we learn BRDF correctly, we can <strong>decouple lighting from the scene</strong>.
+      </p>
+    </div>
+    <div class="fragment" style="background: #e8f5e9; padding: 1.2em; border-radius: 10px;">
+      <h4 style="color: #2e7d32; margin: 0 0 0.5em 0;">Why It Matters</h4>
+      <p style="margin: 0; font-size: 0.9em; color: #333;">
+        Physical studios have fixed lights. Virtual world? <strong>Put lights anywhere.</strong> No more lighting restrictions.
+      </p>
+    </div>
+  </div>
+  <div class="fragment" style="background: #fff3e0; padding: 1em 1.2em; border-radius: 10px; margin-top: 1em; border-left: 4px solid #e65100;">
+    <p style="margin: 0; font-size: 0.95em; color: #333;">
+      <strong>Why I measured to mm precision:</strong> Feed the network ground truth geometry + lighting → it learns material patterns.
+      Tested with PBR-rendered diffuse spheres in virtual world — <span style="color: #2e7d32; font-weight: 600;">it works.</span>
+    </p>
+  </div>
+  <div class="fragment" style="text-align: center; margin-top: 1em;">
+    <p style="font-size: 0.85em; color: #666;">
+      <strong>State of the art:</strong> Relightable 3D Gaussians (ECCV 2024), PBR-NeRF (CVPR 2025)
+    </p>
+    <p style="font-size: 1.05em; color: #9c27b0; font-weight: 600; margin-top: 0.5em;">
+      → Could replace expensive professional studios with much simpler setups
+    </p>
+  </div>
+</section>
+
+<!-- Preliminary Experiments: BRDF Materials -->
+<section>
+  <h2>My Experiment: PBR Test Materials</h2>
+  <img src="/presentation/assets/images/brdf_materials.png" alt="BRDF Materials" style="max-height: 60vh; border-radius: 8px;">
+  <div style="margin-top: 0.5em; display: flex; justify-content: center; gap: 2em; font-size: 0.85em; color: #666;">
+    <span><strong>R</strong> = Roughness (0=smooth, 1=matte)</span>
+    <span><strong>M</strong> = Metallic (0=plastic, 1=metal)</span>
+  </div>
+  <p style="margin-top: 0.3em; font-size: 0.9em; color: #666;">
+    Synthesized spheres with known BRDF parameters — ground truth for training
+  </p>
+</section>
+
+<!-- Preliminary Experiments: Single Material Success -->
+<section>
+  <h2>Result: Network Learns Material</h2>
+  <img src="/presentation/assets/images/inverse_rendering_comparison.png" alt="Inverse Rendering Comparison" style="max-height: 55vh; border-radius: 8px;">
+  <div style="margin-top: 1em; display: flex; justify-content: center; gap: 2em;">
+    <div style="text-align: center;">
+      <p style="margin: 0; font-size: 0.9em;"><strong>Ground Truth:</strong> R=0.30, M=0.00</p>
+    </div>
+    <div style="text-align: center;">
+      <p style="margin: 0; font-size: 0.9em;"><strong>Predicted:</strong> R=0.32, M=0.002</p>
+    </div>
+    <div style="text-align: center; color: #2e7d32;">
+      <p style="margin: 0; font-size: 0.9em;"><strong>MAE: 0.0033</strong></p>
+    </div>
+  </div>
+  <p style="margin-top: 0.8em; font-size: 0.95em; color: #9c27b0; font-weight: 600;">
+    100 epochs — the network recovered the BRDF parameters accurately
+  </p>
+</section>
+
+<!-- Preliminary Experiments: Multi-Material Results -->
+<section>
+  <h2>Challenge: Different Materials</h2>
+  <img src="/presentation/assets/images/multimaterial_comparison.png" alt="Multi-Material Comparison" style="max-height: 60vh; border-radius: 8px;">
+  <div style="margin-top: 0.8em; display: flex; justify-content: center; gap: 1.5em; font-size: 0.85em;">
+    <span style="color: #2e7d32;"><strong>Gold:</strong> Converged ✓</span>
+    <span style="color: #e65100;"><strong>Green Matte:</strong> Partial ~</span>
+    <span style="color: #c62828;"><strong>Chrome:</strong> Failed ✗</span>
+  </div>
+  <p style="margin-top: 0.5em; font-size: 0.85em; color: #666;">
+    Highly reflective materials (chrome) have ambiguity under point lights — future work
+  </p>
+</section>
+
+<!-- Acknowledgements -->
+<section>
+  <h2>Acknowledgements</h2>
+  <div style="margin-top: 1.5em;">
+    <p class="fragment" style="font-size: 1.1em; color: #333; margin-bottom: 1.2em;">
+      <strong style="color: #00a3e0;">Sergey Ignatenko</strong> <span style="color: #666;">(Supervisor)</span> &
+      <strong style="color: #0cc7d3;">Jonas Unger</strong> <span style="color: #666;">(Examiner)</span>
+    </p>
+    <p class="fragment" style="font-size: 1.05em; color: #333; max-width: 800px; margin: 0 auto 1.5em auto;">
+      Thank you for the opportunities, the discussions during our meetings, and everything I learned from you both.
+    </p>
+    <div class="fragment" style="background: #fff3e0; padding: 1em 1.5em; border-radius: 10px; max-width: 700px; margin: 0 auto; border-left: 4px solid #e65100;">
+      <h4 style="color: #e65100; margin: 0 0 0.5em 0;">VR-Lab @ LiU</h4>
+      <p style="margin: 0; font-size: 0.9em; color: #333;">
+        RTX 5090, Threadripper workstations, multi-camera rigs — this project wouldn't exist without the hardware.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="title-slide" data-background-gradient="linear-gradient(135deg, #00b3e7 0%, #0cc7d3 100%)">
+  <h1 style="color: white;">Thank You!</h1>
+  <p style="color: rgba(255,255,255,0.9); font-size: 1.2em;">Questions?</p>
+  <div style="margin-top: 1.5em;">
+    <p style="font-size: 1.4em; font-weight: 700; color: white; margin-bottom: 0.3em;">Shaoxuan Yin</p>
+    <p style="color: rgba(255,255,255,0.95); font-size: 1em;">shayi783@student.liu.se</p>
+  </div>
+  <div style="margin-top: 1.5em; background: rgba(0,0,0,0.3); padding: 1em 1.5em; border-radius: 10px; display: inline-block;">
+    <p style="color: white !important; font-size: 0.85em; margin: 0.3em 0;">
+      <strong style="color: #ffeb3b;">Dataset:</strong> archive.org/details/captured_objects_dataset
+    </p>
+    <p style="color: white !important; font-size: 0.85em; margin: 0.3em 0;">
+      <strong style="color: #ffeb3b;">Software:</strong> github.com/Qervas/CamMatrixCapture
+    </p>
+    <p style="color: white !important; font-size: 0.85em; margin: 0.3em 0;">
+      <strong style="color: #ffeb3b;">Website:</strong> ohao.tech
+    </p>
+  </div>
+</section>

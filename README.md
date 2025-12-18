@@ -25,6 +25,7 @@ This thesis investigates multi-view capture systems for neural rendering, compar
 | Resource | Link |
 |----------|------|
 | **Thesis PDF** | [Download](Neural_Rendering_Dataset_Collection.pdf) |
+| **Defense Slides** | [View Online](https://qervas.github.io/neural-rendering-thesis/) |
 | **Capture Software** | [CamMatrixCapture](https://github.com/Qervas/CamMatrixCapture) |
 | **Studio Objects Dataset** | [Internet Archive](https://archive.org/details/captured_objects_dataset) |
 

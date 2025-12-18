@@ -1,0 +1,422 @@
+<section class="section-slide">
+  <span class="section-number">5</span>
+  <h2>Results</h2>
+</section>
+
+<!-- Dataset Overview -->
+<section data-background-image="/figures/results/objects_overview.png" data-background-size="contain" data-background-color="#000" data-background-position="center">
+  <div style="position: absolute; right: 2%; top: 15%; background: rgba(0,0,0,0.75); padding: 1.5em 2em; border-radius: 12px; max-width: 280px; text-align: left;">
+    <h3 style="color: #0cc7d3; margin: 0 0 0.8em 0; font-size: 1.3em;">Studio Dataset</h3>
+    <p style="color: #fff; margin: 0.5em 0; font-size: 0.95em;"><strong>15</strong> objects</p>
+    <p style="color: #fff; margin: 0.5em 0; font-size: 0.95em;"><strong>432</strong> images each</p>
+    <p style="color: #fff; margin: 0.5em 0; font-size: 0.95em;"><strong>12</strong> cameras × <strong>36</strong> angles</p>
+    <p style="color: #aaa; margin: 1em 0 0 0; font-size: 0.85em;">4 material categories</p>
+  </div>
+</section>
+
+<!-- Dataset Intensity Analysis - Histogram -->
+<section data-background-image="/figures/results/overview_histograms.png" data-background-size="contain" data-background-color="#fff">
+  <!-- Left side - Title and context -->
+  <div style="position: absolute; left: 1%; top: 5%; background: rgba(255,255,255,0.95); padding: 1.2em 1.5em; border-radius: 12px; max-width: 260px; text-align: left; box-shadow: 0 4px 20px rgba(0,0,0,0.15);">
+    <h3 style="color: #333; margin: 0 0 0.5em 0; font-size: 1.1em;">Intensity Histograms</h3>
+    <p style="font-size: 0.8em; color: #666; margin: 0;">15 objects analyzed for color distribution patterns</p>
+    <hr style="border: none; border-top: 1px solid #ddd; margin: 0.8em 0;">
+    <p style="font-size: 0.75em; color: #333; margin: 0 0 0.4em 0;"><strong>Why it matters:</strong></p>
+    <p style="font-size: 0.75em; color: #666; margin: 0;">Different distributions affect reconstruction quality — high contrast & entropy = more features to match</p>
+  </div>
+  <!-- Right side - How to read -->
+  <div style="position: absolute; right: 1%; top: 5%; background: rgba(255,255,255,0.95); padding: 1.2em 1.5em; border-radius: 12px; max-width: 260px; text-align: left; box-shadow: 0 4px 20px rgba(0,0,0,0.15);">
+    <h3 style="color: #0cc7d3; margin: 0 0 0.6em 0; font-size: 1em;">Reading the Charts:</h3>
+    <p style="font-size: 0.8em; color: #333; margin: 0 0 0.5em 0;"><strong>X:</strong> Intensity (0=black → 255=white)</p>
+    <p style="font-size: 0.8em; color: #333; margin: 0 0 0.5em 0;"><strong>Y:</strong> Pixel count (log scale)</p>
+    <p style="font-size: 0.8em; color: #333; margin: 0;"><strong>Lines:</strong> <span style="color: #dc3545;">R</span> / <span style="color: #28a745;">G</span> / <span style="color: #0066cc;">B</span> channels</p>
+    <hr style="border: none; border-top: 1px solid #ddd; margin: 0.8em 0;">
+    <p style="font-size: 0.75em; color: #666; margin: 0;">Left peak = dark BG. Right spread = object pixels.</p>
+  </div>
+</section>
+
+<!-- Dataset Statistics Summary -->
+<section>
+  <h2>Dataset Statistics Highlights</h2>
+  <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1em; margin-top: 0.5em;">
+    <div class="fragment" style="background: #e7f5ff; padding: 1em; border-radius: 10px;">
+      <h3 style="color: #00a3e0; margin: 0 0 0.4em 0; font-size: 0.95em;">Brightest Objects</h3>
+      <p style="margin: 0; font-size: 0.85em;"><strong>Skull</strong> — 39.24 lum</p>
+      <p style="margin: 0.2em 0; font-size: 0.85em;"><strong>Pumpkin</strong> — 37.24 lum</p>
+      <p style="margin: 0; font-size: 0.85em;"><strong>Flowerpot</strong> — 33.52 lum</p>
+      <hr style="border: none; border-top: 1px solid #b8daff; margin: 0.5em 0 0.4em 0;">
+      <p style="margin: 0; font-size: 0.7em; color: #0069d9;"><strong>Luminance</strong> = avg brightness (0-255)</p>
+    </div>
+    <div class="fragment" style="background: #e6fcf5; padding: 1em; border-radius: 10px;">
+      <h3 style="color: #0cc7d3; margin: 0 0 0.4em 0; font-size: 0.95em;">Highest Dynamic Range</h3>
+      <p style="margin: 0; font-size: 0.85em;"><strong>Skull</strong> — 208.7</p>
+      <p style="margin: 0.2em 0; font-size: 0.85em;"><strong>Spray</strong> — 186.3</p>
+      <p style="margin: 0; font-size: 0.85em;"><strong>Flowerpot</strong> — 171.7</p>
+      <hr style="border: none; border-top: 1px solid #99e6e6; margin: 0.5em 0 0.4em 0;">
+      <p style="margin: 0; font-size: 0.7em; color: #0aa;"><strong>Range</strong> = max − min intensity (contrast)</p>
+    </div>
+    <div class="fragment" style="background: #fff3e0; padding: 1em; border-radius: 10px;">
+      <h3 style="color: #e65100; margin: 0 0 0.4em 0; font-size: 0.95em;">Highest Entropy</h3>
+      <p style="margin: 0; font-size: 0.85em;"><strong>Pumpkin</strong> — 4.92 bits</p>
+      <p style="margin: 0.2em 0; font-size: 0.85em;"><strong>Skull</strong> — 4.32 bits</p>
+      <p style="margin: 0; font-size: 0.85em;"><strong>Flowerpot</strong> — 4.26 bits</p>
+      <hr style="border: none; border-top: 1px solid #ffcc80; margin: 0.5em 0 0.4em 0;">
+      <p style="margin: 0; font-size: 0.7em; color: #bf360c;"><strong>Entropy</strong> = texture richness (variation)</p>
+    </div>
+  </div>
+  <!-- Why these matter + Color stats in one row -->
+  <div style="display: flex; justify-content: center; align-items: center; gap: 2em; margin-top: 0.8em; flex-wrap: wrap;">
+    <div class="fragment" style="background: #f8f9fa; padding: 0.6em 1.2em; border-radius: 8px; border-left: 4px solid #0cc7d3;">
+      <p style="margin: 0; font-size: 0.8em; color: #333;">
+        <strong>Why it matters:</strong> High range & entropy → more features → better reconstruction
+      </p>
+    </div>
+    <div class="fragment" style="text-align: center;">
+      <p style="margin: 0; font-size: 0.8em; color: #666;">Color Dominance: <strong style="color: #dc3545;">10 Red</strong> / <strong style="color: #0066cc;">5 Blue</strong></p>
+    </div>
+    <div class="fragment" style="text-align: center;">
+      <p style="margin: 0; font-size: 0.8em; color: #666;">Strongest Red Bias: <strong>Pumpkin</strong> (+23.86)</p>
+    </div>
+  </div>
+</section>
+
+<!-- Performance by Material Type -->
+<section>
+  <h2>Performance by Material Type</h2>
+  <table class="comparison-table">
+    <thead><tr><th>Material</th><th>Photogrammetry</th><th>Neural Rendering</th></tr></thead>
+    <tbody>
+      <tr class="fragment"><td class="method-col">Diffuse</td><td class="best">98-100%</td><td class="best">Excellent</td></tr>
+      <tr class="fragment"><td class="method-col">Glossy</td><td class="neutral">88-92%</td><td class="best">Superior</td></tr>
+      <tr class="fragment"><td class="method-col">Featureless</td><td class="worst">0%</td><td class="best">Works</td></tr>
+      <tr class="fragment"><td class="method-col">Transparent</td><td class="worst">Failed</td><td class="best">Success</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- Dataset Published -->
+<section>
+  <h2>Dataset Published</h2>
+  <div style="display: flex; justify-content: center; align-items: center; gap: 3em; margin-top: 1em;">
+    <div style="flex: 0 0 50%;">
+      <img src="/figures/results/dataset_thumbnail.png" alt="Dataset Thumbnail" style="max-height: 55vh; border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.2);">
+    </div>
+    <div style="flex: 0 0 40%; text-align: left;">
+      <h3 style="color: #0cc7d3; margin: 0 0 1em 0;">Open Access Dataset</h3>
+      <p style="font-size: 1.1em; margin: 0.8em 0;">Available on <strong>Internet Archive</strong></p>
+      <p style="font-size: 0.95em; color: #666; margin: 0.8em 0;">Multi-view images for neural rendering research</p>
+      <div style="margin-top: 1.5em; padding: 1em; background: #f8f9fa; border-radius: 8px; border-left: 4px solid #0cc7d3;">
+        <p style="margin: 0; font-size: 0.85em; color: #666;">archive.org/details/</p>
+        <p style="margin: 0.3em 0 0 0; font-size: 1em; font-weight: 600; color: #333;">captured_objects_dataset</p>
+      </div>
+      <a href="https://archive.org/details/captured_objects_dataset" target="_blank" style="display: inline-block; margin-top: 1.5em; padding: 0.8em 1.5em; background: #0cc7d3; color: white; text-decoration: none; border-radius: 8px; font-weight: 600;">View Dataset →</a>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Material Categories</h2>
+  <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5em; margin-top: 2em;">
+    <div class="fragment" style="background: #e8f5e9; padding: 1.2em; border-radius: 12px; text-align: center;">
+      <h3 style="color: #2e7d32; margin: 0 0 0.5em 0;">Diffuse</h3>
+      <p style="margin: 0; color: #666;">Matte surfaces with rich texture</p>
+      <p style="margin: 0.5em 0 0 0; font-size: 0.9em; color: #2e7d32;">✓ Ideal for photogrammetry</p>
+    </div>
+    <div class="fragment" style="background: #fff3e0; padding: 1.2em; border-radius: 12px; text-align: center;">
+      <h3 style="color: #e65100; margin: 0 0 0.5em 0;">Glossy</h3>
+      <p style="margin: 0; color: #666;">Specular highlights move with camera</p>
+      <p style="margin: 0.5em 0 0 0; font-size: 0.9em; color: #e65100;">⚠ Challenges feature-matching</p>
+    </div>
+    <div class="fragment" style="background: #fce4ec; padding: 1.2em; border-radius: 12px; text-align: center;">
+      <h3 style="color: #c2185b; margin: 0 0 0.5em 0;">Featureless</h3>
+      <p style="margin: 0; color: #666;">Smooth, untextured surfaces</p>
+      <p style="margin: 0.5em 0 0 0; font-size: 0.9em; color: #c2185b;">✗ No points to match</p>
+    </div>
+    <div class="fragment" style="background: #e3f2fd; padding: 1.2em; border-radius: 12px; text-align: center;">
+      <h3 style="color: #1565c0; margin: 0 0 0.5em 0;">Transparent</h3>
+      <p style="margin: 0; color: #666;">Light passes through & bends</p>
+      <p style="margin: 0.5em 0 0 0; font-size: 0.9em; color: #1565c0;">✗ "Impossible" for photogrammetry</p>
+    </div>
+  </div>
+  <p style="text-align: center; margin-top: 2em; color: #666;">Each object: <strong>432 images</strong> (12 cameras × 36 angles)</p>
+</section>
+
+<!-- Banana Comparison - Success -->
+<section>
+  <h2>Banana (Diffuse)</h2>
+  <div class="video-comparison" style="display: flex; gap: 1em; justify-content: center; align-items: flex-start;">
+    <div style="flex: 1; text-align: center;">
+      <video autoplay loop muted playsinline style="width: 100%; max-height: 60vh; border-radius: 8px;">
+        <source src="/renders/nerfacto/banana_nerfacto.mp4" type="video/mp4">
+      </video>
+      <p style="margin-top: 0.5em;"><span class="method-badge" style="background: #00a3e0;">Nerfacto (NeRF)</span></p>
+    </div>
+    <div style="flex: 1; text-align: center;">
+      <video autoplay loop muted playsinline style="width: 100%; max-height: 60vh; border-radius: 8px;">
+        <source src="/renders/splatfacto/banana_splatfacto.mp4" type="video/mp4">
+      </video>
+      <p style="margin-top: 0.5em;"><span class="method-badge">Splatfacto (3DGS)</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- Pot Comparison - Success -->
+<section>
+  <h2>Pot (Textured)</h2>
+  <div class="video-comparison" style="display: flex; gap: 1em; justify-content: center; align-items: flex-start;">
+    <div style="flex: 1; text-align: center;">
+      <video autoplay loop muted playsinline style="width: 100%; max-height: 60vh; border-radius: 8px;">
+        <source src="/renders/nerfacto/pot_nerfacto.mp4" type="video/mp4">
+      </video>
+      <p style="margin-top: 0.5em;"><span class="method-badge" style="background: #00a3e0;">Nerfacto (NeRF)</span></p>
+    </div>
+    <div style="flex: 1; text-align: center;">
+      <video autoplay loop muted playsinline style="width: 100%; max-height: 60vh; border-radius: 8px;">
+        <source src="/renders/splatfacto/pot_splatfacto.mp4" type="video/mp4">
+      </video>
+      <p style="margin-top: 0.5em;"><span class="method-badge">Splatfacto (3DGS)</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- Stone Comparison - Success -->
+<section>
+  <h2>Stone (Diffuse)</h2>
+  <div class="video-comparison" style="display: flex; gap: 1em; justify-content: center; align-items: flex-start;">
+    <div style="flex: 1; text-align: center;">
+      <video autoplay loop muted playsinline style="width: 100%; max-height: 60vh; border-radius: 8px;">
+        <source src="/renders/nerfacto/stone_nerfacto.mp4" type="video/mp4">
+      </video>
+      <p style="margin-top: 0.5em;"><span class="method-badge" style="background: #00a3e0;">Nerfacto (NeRF)</span></p>
+    </div>
+    <div style="flex: 1; text-align: center;">
+      <video autoplay loop muted playsinline style="width: 100%; max-height: 60vh; border-radius: 8px;">
+        <source src="/renders/splatfacto/stone_splatfacto.mp4" type="video/mp4">
+      </video>
+      <p style="margin-top: 0.5em;"><span class="method-badge">Splatfacto (3DGS)</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- Spray Bottle - 3DGS Showcase -->
+<section data-background-video="/renders/splatfacto/spray_splatfacto.mp4" data-background-video-loop data-background-video-muted>
+  <div class="video-title-bar">
+    <h3>Spray Bottle (Featureless) <span class="method-badge">3D Gaussian Splatting</span></h3>
+  </div>
+</section>
+
+<!-- Glass Vase - 3DGS Showcase -->
+<section data-background-video="/renders/splatfacto/vase_glass_splatfacto.mp4" data-background-video-loop data-background-video-muted>
+  <div class="video-title-bar">
+    <h3>Glass Vase (Transparent) <span class="method-badge">3D Gaussian Splatting</span></h3>
+  </div>
+</section>
+
+<!-- Pipeline Overview Results -->
+<section data-background-image="/figures/results/pipeline_overview_part1.png" data-background-size="contain" data-background-color="#000">
+</section>
+
+<section data-background-image="/figures/results/pipeline_overview_part2.png" data-background-size="contain" data-background-color="#000">
+</section>
+
+<section data-background-image="/figures/results/pipeline_overview_part3.png" data-background-size="contain" data-background-color="#000">
+</section>
+
+<!-- Studio Quantitative Evaluation -->
+<section>
+  <h2>Quantitative Comparison</h2>
+  <table class="comparison-table">
+    <thead>
+      <tr><th>Method</th><th>PSNR ↑</th><th>SSIM ↑</th><th>LPIPS ↓</th><th>Training</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="method-col">Nerfacto</td><td>22.07</td><td>0.731</td><td>0.307</td><td>~80 min</td></tr>
+      <tr><td class="method-col">Splatfacto</td><td class="best">33.27</td><td class="best">0.953</td><td class="best">0.104</td><td class="best">~40 min</td></tr>
+    </tbody>
+  </table>
+  <p class="fragment" style="text-align: center; margin-top: 1em;"><strong>+11 dB PSNR improvement</strong> with 3D Gaussian Splatting</p>
+</section>
+
+<!-- RealityCapture Alignment Quality -->
+<section>
+  <h2>RealityCapture Alignment Quality</h2>
+  <div style="display: flex; justify-content: center; gap: 2em; margin-bottom: 0.4em; font-size: 0.7em;">
+    <p style="margin: 0; color: #666;"><strong>Reprojection Error:</strong> pose accuracy (lower = better)</p>
+    <p style="margin: 0; color: #666;"><strong>Tie Points:</strong> matched 3D features (more = richer texture)</p>
+  </div>
+  <div style="display: flex; justify-content: center; gap: 1.5em;">
+    <table class="comparison-table" style="font-size: 0.6em; width: auto;">
+      <thead>
+        <tr><th>Object</th><th>Aligned</th><th>Error</th><th>Tie Pts</th><th></th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Flowerpot</td><td>16%</td><td class="best">0.52 px</td><td>4K</td><td class="best">✓</td></tr>
+        <tr><td>Stone</td><td>100%</td><td class="best">0.53 px</td><td>70K</td><td class="best">✓</td></tr>
+        <tr><td>Dog</td><td>98%</td><td class="best">0.55 px</td><td>60K</td><td class="best">✓</td></tr>
+        <tr><td>Plantpot</td><td>83%</td><td class="best">0.55 px</td><td>46K</td><td class="best">✓</td></tr>
+        <tr><td>Frog</td><td>100%</td><td class="best">0.59 px</td><td>58K</td><td class="best">✓</td></tr>
+        <tr><td>Bilboquet</td><td>89%</td><td class="best">0.62 px</td><td>15K</td><td class="best">✓</td></tr>
+        <tr><td>Pot</td><td>88%</td><td class="best">0.62 px</td><td>55K</td><td class="best">✓</td></tr>
+        <tr><td>Bear</td><td>100%</td><td class="best">0.63 px</td><td>242K</td><td class="best">✓</td></tr>
+      </tbody>
+    </table>
+    <table class="comparison-table" style="font-size: 0.6em; width: auto;">
+      <thead>
+        <tr><th>Object</th><th>Aligned</th><th>Error</th><th>Tie Pts</th><th></th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Pedestal</td><td>100%</td><td class="best">0.64 px</td><td>82K</td><td class="best">✓</td></tr>
+        <tr><td>Cauldron</td><td>92%</td><td class="best">0.65 px</td><td>26K</td><td class="best">✓</td></tr>
+        <tr><td>Banana</td><td>85%</td><td class="best">0.68 px</td><td>18K</td><td class="best">✓</td></tr>
+        <tr><td>Skull</td><td>100%</td><td class="best">0.71 px</td><td>83K</td><td class="best">✓</td></tr>
+        <tr><td>Pumpkin</td><td>100%</td><td class="best">0.76 px</td><td>168K</td><td class="best">✓</td></tr>
+        <tr><td>Spray</td><td colspan="3" style="color: #dc3545;">Featureless</td><td class="worst">✗</td></tr>
+        <tr><td>Vase Glass</td><td colspan="3" style="color: #dc3545;">Transparent</td><td class="worst">✗</td></tr>
+        <tr style="background: transparent;"><td colspan="5"></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div style="display: flex; justify-content: center; gap: 3em; margin-top: 0.6em;">
+    <div style="text-align: center;">
+      <p style="margin: 0; font-size: 1em; font-weight: 700; color: #0cc7d3;">13/15</p>
+      <p style="margin: 0; font-size: 0.7em; color: #666;">Objects succeeded</p>
+    </div>
+    <div style="text-align: center;">
+      <p style="margin: 0; font-size: 1em; font-weight: 700; color: #00a3e0;">0.52–0.76 px</p>
+      <p style="margin: 0; font-size: 0.7em; color: #666;">Sub-pixel accuracy</p>
+    </div>
+    <div style="text-align: center;">
+      <p style="margin: 0; font-size: 1em; font-weight: 700; color: #e65100;">2 Failed</p>
+      <p style="margin: 0; font-size: 0.7em; color: #666;">Neural rendering works</p>
+    </div>
+  </div>
+</section>
+
+<!-- Polarization Effect -->
+<section>
+  <h2>Polarization Effect</h2>
+  <div style="display: flex; justify-content: center; gap: 2em; align-items: flex-end;">
+    <div style="text-align: center;">
+      <img src="/figures/results/polar/vase_without_polarzation.png" alt="Without" style="max-height: 55vh; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+      <p style="margin-top: 0.5em; color: #dc3545; font-weight: 600;">Without Polarization</p>
+      <p style="font-size: 0.85em; color: #666;">Holes where highlights were</p>
+    </div>
+    <div style="text-align: center;">
+      <img src="/figures/results/polar/vase_polarized.png" alt="With" style="max-height: 55vh; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+      <p style="margin-top: 0.5em; color: var(--liu-turquoise); font-weight: 600;">With Polarization</p>
+      <p style="font-size: 0.85em; color: #666;">Complete surface</p>
+    </div>
+  </div>
+</section>
+
+<!-- Gränsö Castle Results -->
+<section>
+  <h2>Gränsö Castle — Large-Scale Reconstruction</h2>
+  <div style="display: flex; justify-content: center; gap: 2em; margin-top: 1em;">
+    <div class="stat-card">
+      <div class="stat-value">5,262</div>
+      <div class="stat-label">Images</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">77.4%</div>
+      <div class="stat-label">Aligned (RC)</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">23.23 dB</div>
+      <div class="stat-label">PSNR (3DGS)</div>
+    </div>
+  </div>
+</section>
+
+<section data-background-video="/presentation/assets/videos/granso_RC.mp4" data-background-video-loop data-background-video-muted>
+  <div class="video-title-bar">
+    <h3>Gränsö Castle <span class="method-badge" style="background: #00a3e0;">RealityCapture</span></h3>
+  </div>
+</section>
+
+<!-- Gränsö Aerial View -->
+<section data-background-image="/figures/results/granso_rc_aerial.png" data-background-size="contain" data-background-color="#000">
+  <div class="video-title-bar">
+    <h3>Aerial View <span class="method-badge" style="background: #00a3e0;">RealityCapture</span></h3>
+  </div>
+</section>
+
+<!-- Gränsö Alignment Stats -->
+<section>
+  <h2>Gränsö Castle — Alignment Quality</h2>
+  <div style="display: flex; justify-content: center; align-items: center; gap: 3em;">
+    <div>
+      <table class="comparison-table" style="font-size: 0.9em;">
+        <tbody>
+          <tr><td style="text-align: left;">Total images</td><td><strong>5,207</strong></td></tr>
+          <tr><td style="text-align: left;">Aligned images</td><td><strong>4,032</strong> (77.4%)</td></tr>
+          <tr><td style="text-align: left;">Tie points</td><td>5.4M</td></tr>
+          <tr><td style="text-align: left;">Mean reproj. error</td><td><strong>0.61 px</strong></td></tr>
+          <tr><td style="text-align: left;">Alignment time</td><td>2h 28m</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="max-width: 45%;">
+      <p style="color: #666; font-size: 0.95em; line-height: 1.6;">
+        <strong>22.6% unaligned</strong> due to:
+      </p>
+      <ul style="color: #666; font-size: 0.9em; margin-top: 0.5em;">
+        <li>Lighting changes during multi-hour capture</li>
+        <li>Moving shadows on facades</li>
+        <li>Vegetation at castle perimeter</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Gränsö Neural Rendering Comparison -->
+<section>
+  <h2>Neural Rendering at Scale</h2>
+  <div style="display: flex; justify-content: center; align-items: center; gap: 2em;">
+    <div style="flex: 0 0 60%; text-align: center;">
+      <img-comparison-slider style="width: 100%; --divider-width: 3px; --divider-color: var(--liu-turquoise);">
+        <img slot="first" src="/figures/results/granso_nerf_single.png" alt="Nerfacto" style="width: 100%; height: auto; border-radius: 8px;">
+        <img slot="second" src="/figures/results/granso_splatfacto_single.png" alt="Splatfacto" style="width: 100%; height: auto; border-radius: 8px;">
+      </img-comparison-slider>
+      <div style="display: flex; justify-content: space-between; margin-top: 0.5em;">
+        <p style="color: #00a3e0; font-weight: 600; margin: 0;">← Nerfacto (14.69 dB)</p>
+        <p style="color: var(--liu-turquoise); font-weight: 600; margin: 0;">Splatfacto (23.23 dB) →</p>
+      </div>
+    </div>
+    <div style="flex: 0 0 30%; text-align: left;">
+      <div class="stat-card highlight" style="margin-bottom: 1em;">
+        <div class="stat-value">+8.5 dB</div>
+        <div class="stat-label">Improvement</div>
+      </div>
+      <p style="color: #666; font-size: 0.9em;">Explicit Gaussians handle outdoor scenes better than implicit volumetric methods</p>
+    </div>
+  </div>
+</section>
+
+<!-- Gränsö Scale Limitations -->
+<section>
+  <h2>Large-Scale Challenges</h2>
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2em; margin-top: 1.5em;">
+    <div class="fragment" style="background: #e7f5ff; padding: 1.5em; border-radius: 12px;">
+      <h3 style="color: #00a3e0; margin: 0 0 0.8em 0;">RealityCapture ✓</h3>
+      <ul style="margin: 0; color: #333; font-size: 0.95em;">
+        <li>Complete scene in one model</li>
+        <li>Handles 5,000+ images</li>
+        <li>Unified geometry</li>
+        <li>Best for documentation</li>
+      </ul>
+    </div>
+    <div class="fragment" style="background: #fff3e0; padding: 1.5em; border-radius: 12px;">
+      <h3 style="color: #e65100; margin: 0 0 0.8em 0;">Neural Rendering ⚠</h3>
+      <ul style="margin: 0; color: #333; font-size: 0.95em;">
+        <li>GPU memory limits (32GB)</li>
+        <li>Must select subset of aligned images</li>
+        <li>Representative photo selection tricky</li>
+        <li>Best for bounded regions</li>
+      </ul>
+    </div>
+  </div>
+  <p class="fragment" style="text-align: center; margin-top: 1.5em; color: #666;">
+    For heritage documentation: <strong>Photogrammetry</strong> for geometry, <strong>Neural</strong> for high-quality visualization
+  </p>
+</section>

@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 450">
+  <defs>
+    <linearGradient id="nnGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00b3e7"/>
+      <stop offset="100%" style="stop-color:#0cc7d3"/>
+    </linearGradient>
+    <marker id="arrowNN" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#00b3e7"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="450" fill="#fafafa"/>
+
+  <!-- Title area -->
+  <text x="450" y="35" font-family="Arial" font-size="20" font-weight="bold" fill="#333" text-anchor="middle">Neural Rendering: Train AI to "memorize" the scene</text>
+
+  <!-- Input: Many Photos -->
+  <g transform="translate(30, 70)">
+    <text x="80" y="0" font-family="Arial" font-size="16" font-weight="bold" fill="#00b3e7" text-anchor="middle">Input: 100+ Photos</text>
+
+    <!-- Stacked photos -->
+    <rect x="30" y="30" width="100" height="70" rx="3" fill="#ddd" stroke="#bbb" stroke-width="1"/>
+    <rect x="20" y="20" width="100" height="70" rx="3" fill="#eee" stroke="#ccc" stroke-width="1"/>
+    <rect x="10" y="10" width="100" height="70" rx="3" fill="white" stroke="#00b3e7" stroke-width="2"/>
+
+    <!-- Simple scene in photo -->
+    <circle cx="60" cy="45" r="20" fill="#e8e8e8"/>
+
+    <!-- More photos indicator -->
+    <text x="130" y="60" font-family="Arial" font-size="24" fill="#666">...</text>
+
+    <text x="80" y="120" font-family="Arial" font-size="12" fill="#666" text-anchor="middle">Different angles</text>
+  </g>
+
+  <!-- Arrow to Neural Network -->
+  <g transform="translate(200, 140)">
+    <line x1="0" y1="30" x2="80" y2="30" stroke="#00b3e7" stroke-width="3" marker-end="url(#arrowNN)"/>
+    <text x="40" y="55" font-family="Arial" font-size="12" fill="#666" text-anchor="middle">Train</text>
+  </g>
+
+  <!-- Neural Network (Brain/AI) -->
+  <g transform="translate(300, 70)">
+    <text x="100" y="0" font-family="Arial" font-size="16" font-weight="bold" fill="#00b3e7" text-anchor="middle">Neural Network</text>
+
+    <!-- Brain-like neural network -->
+    <ellipse cx="100" cy="80" rx="80" ry="60" fill="#f0f9ff" stroke="url(#nnGrad)" stroke-width="3"/>
+
+    <!-- Neurons - input layer -->
+    <circle cx="40" cy="50" r="8" fill="#00b3e7"/>
+    <circle cx="40" cy="80" r="8" fill="#00b3e7"/>
+    <circle cx="40" cy="110" r="8" fill="#00b3e7"/>
+
+    <!-- Neurons - hidden layer -->
+    <circle cx="100" cy="60" r="8" fill="#0cc7d3"/>
+    <circle cx="100" cy="100" r="8" fill="#0cc7d3"/>
+
+    <!-- Neurons - output layer -->
+    <circle cx="160" cy="80" r="8" fill="#00b3e7"/>
+
+    <!-- Connections -->
+    <g stroke="#ccc" stroke-width="1" opacity="0.6">
+      <line x1="48" y1="50" x2="92" y2="60"/>
+      <line x1="48" y1="50" x2="92" y2="100"/>
+      <line x1="48" y1="80" x2="92" y2="60"/>
+      <line x1="48" y1="80" x2="92" y2="100"/>
+      <line x1="48" y1="110" x2="92" y2="60"/>
+      <line x1="48" y1="110" x2="92" y2="100"/>
+      <line x1="108" y1="60" x2="152" y2="80"/>
+      <line x1="108" y1="100" x2="152" y2="80"/>
+    </g>
+
+    <text x="100" y="160" font-family="Arial" font-size="12" fill="#666" text-anchor="middle">"Learns" the scene</text>
+  </g>
+
+  <!-- Arrow to Output -->
+  <g transform="translate(500, 140)">
+    <line x1="0" y1="30" x2="80" y2="30" stroke="#00b3e7" stroke-width="3" marker-end="url(#arrowNN)"/>
+    <text x="40" y="55" font-family="Arial" font-size="12" fill="#666" text-anchor="middle">Ask</text>
+  </g>
+
+  <!-- Output: New View -->
+  <g transform="translate(600, 70)">
+    <text x="100" y="0" font-family="Arial" font-size="16" font-weight="bold" fill="#00b3e7" text-anchor="middle">Output: Any View</text>
+
+    <!-- Generated image -->
+    <rect x="30" y="20" width="140" height="100" rx="4" fill="white" stroke="#0cc7d3" stroke-width="3"/>
+
+    <!-- Scene rendered -->
+    <circle cx="100" cy="70" r="30" fill="url(#nnGrad)" opacity="0.3"/>
+    <circle cx="100" cy="70" r="25" fill="url(#nnGrad)" opacity="0.5"/>
+    <circle cx="100" cy="70" r="20" fill="url(#nnGrad)" opacity="0.7"/>
+
+    <!-- Sparkle effect -->
+    <text x="150" y="40" font-family="Arial" font-size="16">✨</text>
+
+    <!-- Question mark for "what angle?" -->
+    <text x="100" y="145" font-family="Arial" font-size="12" fill="#666" text-anchor="middle">"Show me from here"</text>
+
+  </g>
+
+  <!-- Bottom: Key insight -->
+  <g transform="translate(0, 280)">
+    <rect x="50" y="0" width="800" height="100" rx="8" fill="#f0f9ff" stroke="#00b3e7" stroke-width="1"/>
+
+    <text x="450" y="30" font-family="Arial" font-size="16" fill="#333" text-anchor="middle">
+      Instead of calculating geometry, the AI learns what the scene LOOKS like.
+    </text>
+
+    <g transform="translate(150, 50)">
+      <rect x="0" y="0" width="250" height="35" rx="4" fill="#00b3e7"/>
+      <text x="125" y="23" font-family="Arial" font-size="14" font-weight="bold" fill="white" text-anchor="middle">NeRF (2020) — High quality</text>
+    </g>
+
+    <g transform="translate(500, 50)">
+      <rect x="0" y="0" width="250" height="35" rx="4" fill="#0cc7d3"/>
+      <text x="125" y="23" font-family="Arial" font-size="14" font-weight="bold" fill="white" text-anchor="middle">3D Gaussian Splatting (2023) — Fast</text>
+    </g>
+  </g>
+</svg>
