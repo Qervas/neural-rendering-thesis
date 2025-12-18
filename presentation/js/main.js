@@ -3,22 +3,22 @@
  * Neural Rendering Dataset Collection - Master's Thesis Defense
  */
 
-import Reveal from '/presentation/node_modules/reveal.js/dist/reveal.esm.js';
-import Markdown from '/presentation/node_modules/reveal.js/plugin/markdown/markdown.esm.js';
-import Notes from '/presentation/node_modules/reveal.js/plugin/notes/notes.esm.js';
-import Highlight from '/presentation/node_modules/reveal.js/plugin/highlight/highlight.esm.js';
-import Zoom from '/presentation/node_modules/reveal.js/plugin/zoom/zoom.esm.js';
+import Reveal from 'https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.esm.js';
+import Markdown from 'https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/markdown/markdown.esm.js';
+import Notes from 'https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/notes/notes.esm.js';
+import Highlight from 'https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/highlight/highlight.esm.js';
+import Zoom from 'https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/zoom/zoom.esm.js';
 
 // Slide files to load in order
 const slideFiles = [
-  '/presentation/slides/00-title.html',
-  '/presentation/slides/01-introduction.html',
-  '/presentation/slides/02-background.html',
-  '/presentation/slides/03-methodology.html',
-  '/presentation/slides/04-implementation.html',
-  '/presentation/slides/05-results.html',
-  '/presentation/slides/06-discussion.html',
-  '/presentation/slides/07-conclusion.html'
+  'slides/00-title.html',
+  'slides/01-introduction.html',
+  'slides/02-background.html',
+  'slides/03-methodology.html',
+  'slides/04-implementation.html',
+  'slides/05-results.html',
+  'slides/06-discussion.html',
+  'slides/07-conclusion.html'
 ];
 
 // Load slides then initialize
